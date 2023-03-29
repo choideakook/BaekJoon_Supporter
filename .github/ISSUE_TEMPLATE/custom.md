@@ -1,21 +1,10 @@
 ---
-name: "🙏🏻 Feature request"
-about: Feature 요구사항을 입력해 주세요
-title: '요청:'
-labels: enhancement
+name: Custom issue template
+about: Describe this issue template's purpose here.
+title: ''
+labels: ''
 assignees: ''
 
 ---
 
-### Issue: 📌 request  
-요청 기능 요약을 입력해 주세요.
-  
-  
-  
-### 📌 Todo
-요구사항을 작성해 주세요.
-  
-  
-  
-### 📌 ETC
-기타 사항을 입력해 주세요
+
