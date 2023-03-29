@@ -21,9 +21,9 @@ public class Member {
 
     private String token;
 
-    @OneToMany(mappedBy = "lecture")
+    @OneToMany(mappedBy = "member")
     private List<Lecture> lectures;
 
-    @OneToMany(mappedBy = "comment")
+    @OneToMany(mappedBy = "member")
     private List<Comment> comments;
 }
