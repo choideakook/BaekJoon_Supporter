@@ -15,7 +15,7 @@ public class Comment {
     private Long id;
 
     @Column(columnDefinition = "TEXT")
-    private String reply;
+    private String desc;
 
     private LocalDateTime createDate; // 생성 날짜
 
@@ -28,9 +28,9 @@ public class Comment {
     private Board board;
 
     @Builder
-    public Comment(Long id, String reply, LocalDateTime createDate, LocalDateTime modifyDate, Member member, Board board) {
+    public Comment(Long id, String desc, LocalDateTime createDate, LocalDateTime modifyDate, Member member, Board board) {
         this.id = id;
-        this.reply = reply;
+        this.desc = desc;
         this.createDate = createDate;
         this.modifyDate = modifyDate;
         this.member = member;
