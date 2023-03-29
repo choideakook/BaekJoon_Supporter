@@ -7,8 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Builder
-@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,4 +24,6 @@ public class Comment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Lecture lecture;
+
+
 }
