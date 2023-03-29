@@ -1,15 +1,16 @@
 ---
-name: "📝 Feature Todo"
-about: Feature 계획을 작성해 주세요.
+name: "📝 Feature Plan"
+about: Feature 작업 사항을 입력해 주세요
 title: '계획:'
 labels: enhancement
 assignees: ''
 
 ---
 
-### ✅ Todo
-
-
-
-### ✅ ETC
- 
+### 📌 Todo
+요구사항을 작성해 주세요.
+  
+  
+  
+### 📌 ETC
+기타 사항을 입력해 주세요
