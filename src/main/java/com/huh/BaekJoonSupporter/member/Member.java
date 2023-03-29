@@ -4,14 +4,15 @@ import com.huh.BaekJoonSupporter.board.Board;
 import com.huh.BaekJoonSupporter.comment.Comment;
 import com.huh.BaekJoonSupporter.team.Team;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
+@Builder
 @Getter
-@Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
