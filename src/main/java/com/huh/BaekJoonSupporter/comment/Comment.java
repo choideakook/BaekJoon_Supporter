@@ -30,4 +30,13 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY)
     private Board board;
 
+    @Builder
+    public Comment(Long id, String desc, LocalDateTime createDate, LocalDateTime modifyDate, Member member, Board board) {
+        this.id = id;
+        this.desc = desc;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
+        this.member = member;
+        this.board = board;
+    }
 }
