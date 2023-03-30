@@ -1,4 +1,4 @@
-package com.huh.BaekJoonSupporter.Line;
+package com.huh.BaekJoonSupporter.line;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

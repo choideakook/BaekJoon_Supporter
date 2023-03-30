@@ -1,4 +1,4 @@
-package com.huh.BaekJoonSupporter.Line;
+package com.huh.BaekJoonSupporter.line;
 
 
 import lombok.RequiredArgsConstructor;
