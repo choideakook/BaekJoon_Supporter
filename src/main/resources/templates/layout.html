@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
+  <title>Hello, BaekJoonSupporters</title>
+</head>
+<body>
+  <!-- nav-bar 시작 -->
+  <nav th:replace="~{navbar :: navbarFragment}"></nav>
+  <!-- nav-bar 끝 -->
+
+  <th:block layout:fragment="content" ></th:block>
+
+  <!-- footer 시작 -->
+  <footer th:replace="~{footer :: footerFragment}"></footer>
+  <!-- footer 끝 -->
+</body>
+</html>
