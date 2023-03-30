@@ -1,5 +1,7 @@
-package com.huh.BaekJoonSupporter.Lecture;
+package com.huh.BaekJoonSupporter.board;
 
+import com.huh.BaekJoonSupporter.comment.Comment;
+import com.huh.BaekJoonSupporter.member.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,35 +17,36 @@ import static lombok.AccessLevel.PROTECTED;
 @Entity
 @Getter
 @NoArgsConstructor(access = PROTECTED)
-public class Lecture {
+public class Board {
 
     //-- field --//
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
+
     private String title;
-    private String desc;
+    private String post;
     private LocalDateTime createDate;
     private LocalDateTime modifyDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     private Member member;
 
-    @OneToOne(mappedBy = "lecture", fetch = LAZY)
+    @OneToMany(mappedBy = "board")
     private List<Comment> comments = new ArrayList<>();
 
 
     //-- 편의 method --//
     private void addMember(Member member) {
         this.member = member;
-        member.getLecture.add(this);
+        member.getBoards().add(this);
     }
 
     //-- create method --//
-    public static Lecture createLecture(String title, String desc, Member member) {
-        Lecture lecture = new Lecture();
+    public static Board createLecture(String title, String post, Member member) {
+        Board lecture = new Board();
         lecture.title = title;
-        lecture.desc = desc;
+        lecture.post = post;
         lecture.createDate = LocalDateTime.now();
         lecture.addMember(member);
         return lecture;
@@ -52,9 +55,9 @@ public class Lecture {
     //-- business method --//
 
     // update - title , desc
-    public void updateLecture(String title, String desc) {
+    public void updateLecture(String title, String post) {
         this.title = title;
-        this.desc = desc;
+        this.post = post;
         this.modifyDate = LocalDateTime.now();
     }
 }
