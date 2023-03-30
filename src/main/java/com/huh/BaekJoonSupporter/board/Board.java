@@ -3,10 +3,9 @@ package com.huh.BaekJoonSupporter.board;
 import com.huh.BaekJoonSupporter.comment.Comment;
 import com.huh.BaekJoonSupporter.member.Member;
 import jakarta.persistence.*;
-import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +14,10 @@ import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
-@Entity @Builder
-@Getter @ToString
-@AllArgsConstructor
+
+@Entity
+@Getter
 @NoArgsConstructor(access = PROTECTED)
-@EntityListeners(AuditingEntityListener.class)
 public class Board {
 
     //-- field --//
@@ -29,10 +27,7 @@ public class Board {
 
     private String title;
     private String post;
-
-    @CreatedDate
     private LocalDateTime createDate;
-    @LastModifiedDate
     private LocalDateTime modifyDate;
 
     @ManyToOne(fetch = LAZY)
@@ -41,24 +36,29 @@ public class Board {
     @OneToMany(mappedBy = "board")
     private List<Comment> comments = new ArrayList<>();
 
-    //-- create method --//
-    public static Board create(String title, String post, Member member) {
-        Board board = Board
-                .builder()
-                .title(title)
-                .post(post)
-                .member(member)
-                .build();
 
-        member.getBoards().add(board);
-        return board;
+    //-- 편의 method --//
+    private void addMember(Member member) {
+        this.member = member;
+        member.getBoards().add(this);
+    }
+
+    //-- create method --//
+    public static Board createLecture(String title, String post, Member member) {
+        Board lecture = new Board();
+        lecture.title = title;
+        lecture.post = post;
+        lecture.createDate = LocalDateTime.now();
+        lecture.addMember(member);
+        return lecture;
     }
 
     //-- business method --//
 
-    //- modify -//
-    public void modify(String title, String post) {
+    // update - title , desc
+    public void updateLecture(String title, String post) {
         this.title = title;
         this.post = post;
+        this.modifyDate = LocalDateTime.now();
     }
 }
