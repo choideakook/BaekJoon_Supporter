@@ -34,30 +34,4 @@ public class Board {
 
     @OneToMany(mappedBy = "board")
     private List<Comment> comments = new ArrayList<>();
-
-
-    //-- 편의 method --//
-    private void addMember(Member member) {
-        this.member = member;
-        member.getBoards().add(this);
-    }
-
-    //-- create method --//
-    public static Board createLecture(String title, String post, Member member) {
-        Board lecture = new Board();
-        lecture.title = title;
-        lecture.post = post;
-        lecture.createDate = LocalDateTime.now();
-        lecture.addMember(member);
-        return lecture;
-    }
-
-    //-- business method --//
-
-    // update - title , desc
-    public void updateLecture(String title, String post) {
-        this.title = title;
-        this.post = post;
-        this.modifyDate = LocalDateTime.now();
-    }
 }
