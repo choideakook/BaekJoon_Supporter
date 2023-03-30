@@ -1,3 +1,4 @@
+
 package com.huh.BaekJoonSupporter.comment;
 
 import com.huh.BaekJoonSupporter.board.Board;
@@ -9,13 +10,15 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Comment {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(columnDefinition = "TEXT")
-    private String desc;
+    private String content;
 
     private LocalDateTime createDate; // 생성 날짜
 
