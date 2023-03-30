@@ -3,8 +3,10 @@ package com.huh.BaekJoonSupporter.board;
 import com.huh.BaekJoonSupporter.comment.Comment;
 import com.huh.BaekJoonSupporter.member.Member;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,9 +16,11 @@ import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
-@Entity
-@Getter
+@Entity @Builder
+@Getter @ToString
+@AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
+@EntityListeners(AuditingEntityListener.class)
 public class Board {
 
     //-- field --//
@@ -26,7 +30,10 @@ public class Board {
 
     private String title;
     private String post;
+
+    @CreatedDate
     private LocalDateTime createDate;
+    @LastModifiedDate
     private LocalDateTime modifyDate;
 
     @ManyToOne(fetch = LAZY)

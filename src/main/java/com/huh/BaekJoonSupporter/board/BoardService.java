@@ -17,8 +17,7 @@ public class BoardService {
     //-- create board --//
     @Transactional
     public Long create(String title, String post, Member member) {
-        Board board = Board.createLecture(title, post, member);
-        Board saveBoard = repository.save(board);
+        Board board =
         return saveBoard.getId();
     }
 
