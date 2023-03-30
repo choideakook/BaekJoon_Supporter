@@ -1,5 +1,6 @@
-package com.huh.BaekJoonSupporter.Line;
+package com.huh.BaekJoonSupporter.line;
 
+import com.huh.BaekJoonSupporter.team.Team;
 import jakarta.persistence.*;
 import lombok.*;
 
