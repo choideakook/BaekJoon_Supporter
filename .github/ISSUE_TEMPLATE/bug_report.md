@@ -1,7 +1,7 @@
 ---
 name: "🐞 bug fix"
 about: Feature 수정사항을 입력해 주세요
-title: '요청:'
+title: '수정:'
 labels: bug
 assignees: ''
 
