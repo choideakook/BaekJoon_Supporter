@@ -15,7 +15,7 @@ public class BoardService {
 
     private final BoardRepository repository;
 
-    //-- create board --//
+    //-- create board--//
     @Transactional
     public Long create(String title, String post, Member member) {
         Board board = Board.create(title, post, member);
