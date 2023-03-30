@@ -41,4 +41,25 @@ public class Board {
 
     @OneToMany(mappedBy = "board")
     private List<Comment> comments = new ArrayList<>();
+
+    //-- create method --//
+    public static Board create(String title, String post, Member member) {
+        Board board = Board
+                .builder()
+                .title(title)
+                .post(post)
+                .member(member)
+                .build();
+
+        member.getBoards().add(board);
+        return board;
+    }
+
+    //-- business method --//
+
+    //- modify -//
+    public void modify(String title, String post) {
+        this.title = title;
+        this.post = post;
+    }
 }
