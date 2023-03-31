@@ -17,6 +17,7 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 .DS_Store
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -35,3 +36,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### custom ###
+build.gralde
+*.yml
