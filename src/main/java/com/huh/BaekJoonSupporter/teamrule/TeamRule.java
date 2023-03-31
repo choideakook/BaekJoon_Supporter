@@ -1,6 +1,6 @@
 package com.huh.BaekJoonSupporter.teamrule;
 
-import com.huh.BaekJoonSupporter.Team.Team;
+import com.huh.BaekJoonSupporter.team.Team;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
