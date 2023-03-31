@@ -1,6 +1,6 @@
 package com.huh.BaekJoonSupporter.team;
 
-import com.huh.BaekJoonSupporter.Line.Line;
+import com.huh.BaekJoonSupporter.line.Line;
 import com.huh.BaekJoonSupporter.member.Member;
 import com.huh.BaekJoonSupporter.teamrule.TeamRule;
 import jakarta.persistence.*;
