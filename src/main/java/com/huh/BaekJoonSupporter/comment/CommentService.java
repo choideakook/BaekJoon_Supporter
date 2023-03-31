@@ -39,6 +39,7 @@ public class CommentService {
     // 댓글 수정 //
     public void modify(Comment comment, String content) {
         Comment comment1 = Comment.builder()
+                .id(comment.getId()) // 댓글 id 변경 되는거 수정
                 .content(content) // 댓글 수정
                 .modifyDate(LocalDateTime.now()) // 수정 날짜
                 .build();
