@@ -1,23 +1,23 @@
 package com.huh.BaekJoonSupporter.team;
 
-import com.huh.BaekJoonSupporter.Line.Line;
+import com.huh.BaekJoonSupporter.line.Line;
 import com.huh.BaekJoonSupporter.member.Member;
 import com.huh.BaekJoonSupporter.teamrule.TeamRule;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.cglib.core.Local;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import static lombok.AccessLevel.PROTECTED;
 
-@Getter
-@Setter
 @Entity
+@Getter
+@Builder
 @NoArgsConstructor(access = PROTECTED)
+@AllArgsConstructor
 public class Team {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,16 +30,19 @@ public class Team {
     private Line line;
 
     @OneToMany
-    private List<TeamRule> teamRules;
+    private List<TeamRule> teamRules = new ArrayList<>();
 
     @OneToMany(mappedBy = "team")
     private List<Member> members = new ArrayList<>();
 
+    private LocalDateTime createDate;
+    private LocalDateTime modifyDate;
+
     @Builder
-    public Team(Long leaderId, String teamName, Line line, Member leader) {
+    public Team(Long id, Long leaderId, String teamName, Line line, LocalDateTime createDate) {
         this.leaderId = leaderId;
         this.teamName = teamName;
         this.line = line;
-        members.add(leader);
+        this.createDate = createDate;
     }
 }
