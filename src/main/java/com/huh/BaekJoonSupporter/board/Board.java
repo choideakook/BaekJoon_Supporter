@@ -15,7 +15,7 @@ import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
-@Entity @Builder
+@Entity @Builder(toBuilder = true)
 @Getter @ToString
 @AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
@@ -57,8 +57,10 @@ public class Board {
     //-- business method --//
 
     //- modify -//
-    public void modify(String title, String post) {
-        this.title = title;
-        this.post = post;
+    public Board modify(String title, String post) {
+        return this.toBuilder()
+                .title(title)
+                .post(post)
+                .build();
     }
 }

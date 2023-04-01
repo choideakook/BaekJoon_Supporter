@@ -19,6 +19,7 @@ public class BoardService {
     @Transactional
     public Long create(String title, String post, Member member) {
         Board board = Board.create(title, post, member);
+        repository.save(board);
         return board.getId();
     }
 
@@ -40,12 +41,14 @@ public class BoardService {
     //-- modify --//
     @Transactional
     public void modify(Board board, String title, String post) {
-        board.modify(title, post);
+        Board modifiedBoard = board.modify(title, post);
+        repository.save(modifiedBoard);
     }
 
     //-- delete --//
     @Transactional
-    public void delete(Board board) {
+    public void delete(Long boardId) {
+        Board board = this.getBoard(boardId);
         repository.delete(board);
     }
 }
