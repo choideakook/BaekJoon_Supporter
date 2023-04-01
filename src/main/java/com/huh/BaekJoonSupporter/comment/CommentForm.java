@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CommentForm {
