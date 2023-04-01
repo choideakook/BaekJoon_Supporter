@@ -1,29 +1,20 @@
 spring:
+  profiles:
+    active: dev
   datasource:
-    driver-class-name: 
-    url: 
-    username: 
-    password: 
-
-  thymeleaf:
-    cache: false
-    prefix: file:src/main/resources/templates/
-    devtools:
-      livereload:
-        enabled: true
-      restart:
-        enabled: true
-
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://127.0.0.1:3306/baek?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
+    username: root
+    password:
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
-        format_sql: true
         show_sql: true
+        format_sql: true
+        use_sql_comments: true
 
 logging.level:
   org.hibernate:
-    SQL: debug
-#    type: trace # (Spring boot 2.X.X)
     orm.jdbc.bind: trace # (Spring boot 3.X.X)
