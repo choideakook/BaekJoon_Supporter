@@ -2,9 +2,7 @@ package com.huh.BaekJoonSupporter.comment;
 
 import com.huh.BaekJoonSupporter.board.Board;
 import com.huh.BaekJoonSupporter.board.BoardService;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.Valid;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -46,7 +44,7 @@ public class CommentController {
         if (!comment.getMember().getName().equals(principal.getName())) { // 댓글 작성한 회원정보와 일치 여부 확인
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다");
         }
-        commentForm = CommentForm.builder() // 댓글 폼에 내용 저장
+        commentForm.toBuilder()
                 .comment(comment.getContent())
                 .build();
         return "수정";// 댓글 폼 html
