@@ -48,10 +48,10 @@ public class BoardController {
             BindingResult bindingResult,
             Principal principal
     ) {
-        Member member = memberService.getMember("글쓴이");
+        // 로그인 기능 구현 되면 principal.getName 을 바꿔야 함
+        Member member = memberService.getMember("init 글쓴이");
         boardService.create(boardCreateForm.getTitle(), boardCreateForm.getPost(), member);
         return "redirect:/board/list";
-//        return "/board/create";
     }
 
     //-- 게시물 디테일 --//
