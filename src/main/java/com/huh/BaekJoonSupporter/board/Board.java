@@ -29,6 +29,7 @@ public class Board {
 
     private String title;
     private String post;
+    private Integer view;
 
     @CreatedDate
     private LocalDateTime createDate;
@@ -39,15 +40,17 @@ public class Board {
     private Member member;
 
     @OneToMany(mappedBy = "board")
+    @Builder.Default
     private List<Comment> comments = new ArrayList<>();
 
     //-- create method --//
-    public static Board create(String title, String post, Member member) {
+    protected static Board create(String title, String post, Member member) {
         Board board = Board
                 .builder()
                 .title(title)
                 .post(post)
                 .member(member)
+                .view(0)
                 .build();
 
         member.getBoards().add(board);
@@ -57,10 +60,15 @@ public class Board {
     //-- business method --//
 
     //- modify -//
-    public Board modify(String title, String post) {
+    protected Board modify(String title, String post) {
         return this.toBuilder()
                 .title(title)
                 .post(post)
                 .build();
+    }
+
+    //- view adder -//
+    protected void addView() {
+        this.view++;
     }
 }
