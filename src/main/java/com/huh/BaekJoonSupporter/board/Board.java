@@ -29,6 +29,7 @@ public class Board {
 
     private String title;
     private String post;
+    private Integer view;
 
     @CreatedDate
     private LocalDateTime createDate;
@@ -39,6 +40,7 @@ public class Board {
     private Member member;
 
     @OneToMany(mappedBy = "board")
+    @Builder.Default
     private List<Comment> comments = new ArrayList<>();
 
     //-- create method --//

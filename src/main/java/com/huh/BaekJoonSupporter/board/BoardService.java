@@ -3,9 +3,13 @@ package com.huh.BaekJoonSupporter.board;
 import com.huh.BaekJoonSupporter.member.Member;
 import com.huh.BaekJoonSupporter.member.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +42,15 @@ public class BoardService {
     //-- find all --//
     public List<Board> getBoardAll() {
         return boardRepository.findAll();
+    }
+
+    //-- find all + paging --//
+    public Page<Board> getBoardAll(int page) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+
+        PageRequest pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        return boardRepository.findAll(pageable);
     }
 
     //-- modify --//
