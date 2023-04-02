@@ -44,12 +44,13 @@ public class Board {
     private List<Comment> comments = new ArrayList<>();
 
     //-- create method --//
-    public static Board create(String title, String post, Member member) {
+    protected static Board create(String title, String post, Member member) {
         Board board = Board
                 .builder()
                 .title(title)
                 .post(post)
                 .member(member)
+                .view(0)
                 .build();
 
         member.getBoards().add(board);
@@ -59,10 +60,15 @@ public class Board {
     //-- business method --//
 
     //- modify -//
-    public Board modify(String title, String post) {
+    protected Board modify(String title, String post) {
         return this.toBuilder()
                 .title(title)
                 .post(post)
                 .build();
+    }
+
+    //- view adder -//
+    protected void addView() {
+        this.view++;
     }
 }

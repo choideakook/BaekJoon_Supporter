@@ -75,13 +75,13 @@
 
             <li th:classappend="${!paging.hasPrevious} ? 'disabled'">
                 <a th:href="@{|?page=${paging.number - 1}|}">
-                    <span>이전</span>
+                    이전
                 </a>
             </li>
 
             <li th:each="page: ${#numbers.sequence(0, paging.totalPages - 1)}"
                 th:classappend="${page == paging.number} ? 'active'"
-                th:if="${page >= paging.number - 2 and page <= paging.number + 2}">
+                th:if="${page >= paging.number - 5 and page <= paging.number + 5}">
                 <a th:text="${page}" th:href="@{|?page=${page}|}"></a>
             </li>
 

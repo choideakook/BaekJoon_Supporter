@@ -9,10 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -51,8 +48,22 @@ public class BoardController {
             BindingResult bindingResult,
             Principal principal
     ) {
-        Member member = memberService.getMember(principal.getName());
+        Member member = memberService.getMember("글쓴이");
         boardService.create(boardCreateForm.getTitle(), boardCreateForm.getPost(), member);
         return "redirect:/board/list";
+//        return "/board/create";
+    }
+
+    //-- 게시물 디테일 --//
+    @GetMapping("/detail/{id}")
+    public String showDetail(
+            @PathVariable Long id,
+            Model model
+    ) {
+        Board board = boardService.getBoard(id);
+        boardService.viewAdder(board);
+
+        model.addAttribute("board", board);
+        return "/board/detail";
     }
 }

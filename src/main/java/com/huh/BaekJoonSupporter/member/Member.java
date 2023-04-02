@@ -6,9 +6,10 @@ import com.huh.BaekJoonSupporter.team.Team;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Builder
+@Builder(toBuilder = true)
 @Getter
 @Entity
 @NoArgsConstructor
@@ -27,7 +28,8 @@ public class Member {
     private String token;
 
     @OneToMany(mappedBy = "member")
-    private List<Board> boards;
+    @Builder.Default
+    private List<Board> boards = new ArrayList<>();
 
     @ManyToOne
     private Team team;
