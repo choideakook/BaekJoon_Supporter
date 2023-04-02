@@ -2,6 +2,8 @@ package com.huh.BaekJoonSupporter.comment;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CommentRepository extends JpaRepository<Comment, Long> {
+import java.util.Optional;
 
+public interface CommentRepository extends JpaRepository<Comment, Long> {
+    Optional<Comment> findByContent(String content);
 }

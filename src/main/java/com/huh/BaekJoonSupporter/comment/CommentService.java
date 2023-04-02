@@ -17,7 +17,7 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     // 댓글 생성 //
-    public void create(String content, Board board, Member member) {
+    public Comment create(String content, Board board, Member member) {
         Comment comment = Comment.builder()
                 .content(content) // 내용
                 .createDate(LocalDateTime.now()) // 등록일 (최초 게시)
@@ -27,6 +27,7 @@ public class CommentService {
         board.getComments().add(comment); // board 에 추가
         member.getComments().add(comment); // member 에 추가
         this.commentRepository.save(comment); // 댓글 저장
+        return comment;
     }
 
     // 댓글 조회 //
