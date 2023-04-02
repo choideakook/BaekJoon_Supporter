@@ -11,18 +11,21 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class CommentService {
 
     private final CommentRepository commentRepository;
 
     // 댓글 생성 //
-    public void create(String content, Board board, Member member) { // Member 추가
+    public void create(String content, Board board, Member member) {
         Comment comment = Comment.builder()
                 .content(content) // 내용
                 .createDate(LocalDateTime.now()) // 등록일 (최초 게시)
                 .board(board)   // 게시글
                 .member(member) // 작성자
                 .build(); // 마무리
+        board.getComments().add(comment); // board 에 추가
+        member.getComments().add(comment); // member 에 추가
         this.commentRepository.save(comment); // 댓글 저장
     }
 
@@ -37,13 +40,12 @@ public class CommentService {
     }
 
     // 댓글 수정 //
-    public void modify(Comment comment, String content) {
-        Comment comment1 = Comment.builder()
-                .id(comment.getId()) // 댓글 id 변경 되는거 수정
-                .content(content) // 댓글 수정
-                .modifyDate(LocalDateTime.now()) // 수정 날짜
+    public void modify(Comment comment, String contents) {
+        Comment comment1 = comment.toBuilder()   // toBuilder 로 수정!!!
+                .content(contents)
+                .modifyDate(LocalDateTime.now())
                 .build();
-        this.commentRepository.save(comment1); // 댓글 저장
+        this.commentRepository.save(comment1);
     }
 
     // 댓글 삭제 //
