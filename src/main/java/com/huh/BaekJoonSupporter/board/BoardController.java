@@ -7,16 +7,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-<<<<<<< HEAD
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-=======
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
->>>>>>> DeaKuk40
 
 @Controller
 @RequestMapping("/board")
@@ -47,7 +42,7 @@ public class BoardController {
 
     //-- 게시물 생성 처리 --//
     @PostMapping("/create")
-//    @PreAuthorize("isAuthenticated()")
+//    @PreAuthorize("isAuthenticated()") // 로그인 기능 완성 후 활성화 해야됨
     public String showCreateForm(
             BoardCreateForm boardCreateForm,
             BindingResult bindingResult,
@@ -63,6 +58,7 @@ public class BoardController {
     @GetMapping("/detail/{id}")
     public String showDetail(
             @PathVariable Long id,
+            Principal principal,
             Model model
     ) {
         Board board = boardService.getBoard(id);
