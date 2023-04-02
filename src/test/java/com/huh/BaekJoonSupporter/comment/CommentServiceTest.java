@@ -54,4 +54,5 @@ class CommentServiceTest {
         commentService.delete(comment12);
         assertTrue(!comment12.getContent().isEmpty());
     }
+
 }
