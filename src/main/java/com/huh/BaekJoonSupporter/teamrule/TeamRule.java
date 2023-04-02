@@ -2,12 +2,13 @@ package com.huh.BaekJoonSupporter.teamrule;
 
 import com.huh.BaekJoonSupporter.team.Team;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
-@Setter
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class TeamRule {
 
     @Id
