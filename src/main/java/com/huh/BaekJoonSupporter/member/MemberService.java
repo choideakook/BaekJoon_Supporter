@@ -12,12 +12,12 @@ import java.util.Optional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     public void create(String name, String password, String token) {
         Member member = Member.builder()
                 .name(name)
-//                .password(passwordEncoder.encode(password))
+                .password(passwordEncoder.encode(password))
                 .token(token)
                 .build();
         memberRepository.save(member);
@@ -35,7 +35,7 @@ public class MemberService {
     public void modify(String name, String password, String token) {
         Member member = Member.builder()
                 .name(name)
-//                .password(passwordEncoder.encode(password))
+                .password(passwordEncoder.encode(password))
                 .token(token)
                 .build();
         memberRepository.save(member);
