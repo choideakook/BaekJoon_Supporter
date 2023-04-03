@@ -4,7 +4,9 @@ import com.huh.BaekJoonSupporter.board.form.BoardCreateForm;
 import com.huh.BaekJoonSupporter.member.Member;
 import com.huh.BaekJoonSupporter.member.MemberService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +17,7 @@ import java.security.Principal;
 @Controller
 @RequestMapping("/board")
 @RequiredArgsConstructor
+@Slf4j
 public class BoardController {
 
     private final BoardService boardService;
@@ -53,7 +56,7 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
-    //-- 게시물 디테일 --//
+    //-- 게시물 상세 --//
     @GetMapping("/detail/{id}")
     public String showDetail(
             @PathVariable Long id,
@@ -65,5 +68,44 @@ public class BoardController {
 
         model.addAttribute("board", board);
         return "/board/detail";
+    }
+
+    //-- 게시물 수정 폼 --//
+    @GetMapping("/update/{id}")
+//    @PreAuthorize("isAuthenticated()")  // 지금은 권한 없이 아무나 삭제 가능함
+    public String showUpdate(
+            @PathVariable Long id,
+            BoardCreateForm boardCreateForm,
+            Principal principal
+    ) {
+        Board board = boardService.getBoard(id);
+        boardCreateForm.setTitle(board.getTitle());
+        boardCreateForm.setPost(board.getPost());
+        return "/board/create";
+    }
+
+    //-- 게시물 수정 처리 --//
+    @PostMapping("/update/{id}")
+//    @PreAuthorize("isAuthenticated()")  // 지금은 권한 없이 아무나 삭제 가능함
+    public String showUpdate(
+            @PathVariable Long id,
+            Principal principal,
+            BoardCreateForm boardCreateForm
+    ) {
+        Board board = boardService.getBoard(id);
+        boardService.modify(board, boardCreateForm.getTitle(), boardCreateForm.getPost());
+        return String.format("redirect:/board/detail/%s", id);
+    }
+
+
+    //-- 게시물 삭제 --//
+    @GetMapping("/delete/{id}")
+//    @PreAuthorize("isAuthenticated()")  // 지금은 권한 없이 아무나 삭제 가능함
+    public String showDelete(
+            @PathVariable Long id,
+            Principal principal
+    ) {
+        boardService.delete(id);
+        return "redirect:/board/list";
     }
 }
