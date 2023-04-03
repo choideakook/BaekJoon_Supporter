@@ -23,6 +23,8 @@
         </div>
         <div class="mt-4">
             <a href="/board/list" class="text-blue-500">목록으로 돌아가기</a>
+            <a th:href="@{|/board/delete/${board.id}|}" class="text-blue-500"> / 게시물 삭제</a>
+            <a th:href="@{|/board/update/${board.id}|}" class="text-blue-500"> / 게시물 수정</a>
         </div>
     </div>
 
