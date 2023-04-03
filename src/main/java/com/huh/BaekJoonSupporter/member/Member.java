@@ -28,11 +28,13 @@ public class Member {
     private String token;
 
     @OneToMany(mappedBy = "member")
+    @Builder.Default
     private List<Board> boards = new ArrayList<>();
 
     @ManyToOne
     private Team team;
 
     @OneToMany(mappedBy = "member")
+    @Builder.Default
     private List<Comment> comments = new ArrayList<>();
 }

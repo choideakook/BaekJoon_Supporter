@@ -33,7 +33,7 @@ public class MemberService {
     }
 
     public void modify(Member member, String password, String token) {
-        Member member1 = member.toBuilder()
+        Member member1 = member.builder()
                 .password(passwordEncoder.encode(password))
                 .token(token)
                 .build();
