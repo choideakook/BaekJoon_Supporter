@@ -1,7 +1,16 @@
 <html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
 <div layout:fragment="content" class="py-12">
 
-    <h5 class="text-lg font-semibold mb-4">게시판</h5>
+    <div class="">
+        <h5 class="text-lg font-semibold mb-4">게시판</h5>
+
+        <a href="/board/create"
+           class="bg-blue-500 text-white py-2 px-4
+               rounded-md hover:bg-blue-600 transition
+               duration-200 ease-in-out cursor-pointer">
+            게시물 등록
+        </a>
+    </div>
 
     <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
@@ -34,7 +43,8 @@
 
             <!-- 게시물 번호 -->
             <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900" th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></div>
+                <div class="text-sm text-gray-900"
+                     th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></div>
             </td>
 
             <!-- 게시글 + 댓글 수 -->
@@ -70,36 +80,31 @@
     </table>
 
     <!-- 페이징 처리 시작 -->
-    <div th:if="${!paging.isEmpty()}">
-        <ul>
+    <div th:if="${!paging.isEmpty()}"
+         class="pagination flex justify-center space-x-2">
 
-            <li th:classappend="${!paging.hasPrevious} ? 'disabled'">
-                <a th:href="@{|?page=${paging.number - 1}|}">
-                    이전
-                </a>
-            </li>
+        <a th:href="@{|?page=${paging.number - 1}|}"
+           class="px-2 py-1 bg-gray-200 text-gray-800 rounded"
+           th:classappend="${!paging.hasPrevious} ? 'sr-only'">
+            이전
+        </a>
 
-            <li th:each="page: ${#numbers.sequence(0, paging.totalPages - 1)}"
-                th:classappend="${page == paging.number} ? 'active'"
-                th:if="${page >= paging.number - 5 and page <= paging.number + 5}">
-                <a th:text="${page}" th:href="@{|?page=${page}|}"></a>
-            </li>
+        <span th:each="page: ${#numbers.sequence(0, paging.totalPages - 1)}"
+              class="px-2 py-1 bg-gray-200 text-gray-800 rounded hover:bg-gray-400"
+              th:classappend="${page == paging.number} ? 'active'"
+              th:if="${page >= paging.number - 5 and page <= paging.number + 5}">
 
-            <li th:classappend="${!paging.hasNext} ? 'disabled'">
-                <a th:href="@{|?page=${paging.number + 1}|}">
-                    <span>다음</span>
-                </a>
-            </li>
-        </ul>
+            <a th:text="${page + 1}" th:href="@{|?page=${page}|}"></a>
+        </span>
+
+        <a th:href="@{|?page=${paging.number + 1}|}"
+           class="px-2 py-1 bg-gray-200 text-gray-800 rounded"
+           th:classappend="${!paging.hasNext} ? 'sr-only'">
+            다음
+        </a>
+
     </div>
     <!-- 페이징 처리 종료 -->
-
-    <a href="/board/create"
-       class="bg-blue-500 text-white py-2 px-4
-               rounded-md hover:bg-blue-600 transition
-               duration-200 ease-in-out cursor-pointer">
-        게시물 등록
-    </a>
 
 </div>
 </html>

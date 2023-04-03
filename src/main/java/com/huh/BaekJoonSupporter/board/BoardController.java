@@ -5,7 +5,6 @@ import com.huh.BaekJoonSupporter.member.Member;
 import com.huh.BaekJoonSupporter.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,11 +23,11 @@ public class BoardController {
     //-- 게시판 전체 목록 --//
     @GetMapping("/list")
     public String showList(
-            @RequestParam(defaultValue = "0") int pate,
+            @RequestParam(defaultValue = "0") int page,
             Principal principal,
             Model model
     ) {
-        Page<Board> paging = boardService.getBoardAll(pate);
+        Page<Board> paging = boardService.getBoardAll(page);
         model.addAttribute("paging", paging);
         return "/board/boardList";
     }
