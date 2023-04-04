@@ -2,6 +2,7 @@ package com.huh.BaekJoonSupporter.board;
 
 import com.huh.BaekJoonSupporter.DataNotFoundException;
 import com.huh.BaekJoonSupporter.category.Category;
+import com.huh.BaekJoonSupporter.category.CategoryService;
 import com.huh.BaekJoonSupporter.member.Member;
 import com.huh.BaekJoonSupporter.member.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -56,6 +57,7 @@ public class BoardService {
         return boardRepository.findAll();
     }
 
+
     //-- find all + paging --//
     public Page<Board> getBoardAll(int page) {
         List<Sort.Order> sorts = new ArrayList<>();
@@ -64,6 +66,15 @@ public class BoardService {
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
         return boardRepository.findAll(pageable);
     }
+
+    //-- find by category --//
+    public Page<Board> getBoard(int page, Category category) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        return boardRepository.findByCategory(pageable, category);
+    }
+
 
     //-- modify --//
     @Transactional
@@ -88,4 +99,5 @@ public class BoardService {
     public void viewAdder(Board board) {
         board.addView();
     }
+
 }

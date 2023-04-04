@@ -3,7 +3,6 @@ package com.huh.BaekJoonSupporter.category;
 import com.huh.BaekJoonSupporter.DataNotFoundException;
 import com.huh.BaekJoonSupporter.board.Board;
 import com.huh.BaekJoonSupporter.board.BoardService;
-import com.huh.BaekJoonSupporter.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

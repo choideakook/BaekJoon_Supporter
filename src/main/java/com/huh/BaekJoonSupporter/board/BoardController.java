@@ -1,12 +1,13 @@
 package com.huh.BaekJoonSupporter.board;
 
 import com.huh.BaekJoonSupporter.board.form.BoardCreateForm;
+import com.huh.BaekJoonSupporter.category.Category;
+import com.huh.BaekJoonSupporter.category.CategoryService;
 import com.huh.BaekJoonSupporter.member.Member;
 import com.huh.BaekJoonSupporter.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,15 +23,25 @@ public class BoardController {
 
     private final BoardService boardService;
     private final MemberService memberService;
+    private final CategoryService categoryService;
 
     //-- 게시판 전체 목록 --//
     @GetMapping("/list")
     public String showList(
             @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "-1") Long id,
             Principal principal,
             Model model
     ) {
-        Page<Board> paging = boardService.getBoardAll(page);
+        Page<Board> paging;
+
+        if (id == -1) {
+            paging = boardService.getBoardAll(page);
+
+        } else {
+            Category category = categoryService.getCategory(id);
+            paging = boardService.getBoard(page, category);
+        }
         model.addAttribute("paging", paging);
         return "/board/boardList";
     }
