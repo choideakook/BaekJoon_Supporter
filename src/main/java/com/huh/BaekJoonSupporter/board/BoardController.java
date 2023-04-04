@@ -1,18 +1,20 @@
 package com.huh.BaekJoonSupporter.board;
 
 import com.huh.BaekJoonSupporter.board.form.BoardCreateForm;
+import com.huh.BaekJoonSupporter.category.Category;
+import com.huh.BaekJoonSupporter.category.CategoryService;
 import com.huh.BaekJoonSupporter.member.Member;
 import com.huh.BaekJoonSupporter.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/board")
@@ -22,15 +24,27 @@ public class BoardController {
 
     private final BoardService boardService;
     private final MemberService memberService;
+    private final CategoryService categoryService;
 
     //-- 게시판 전체 목록 --//
     @GetMapping("/list")
     public String showList(
             @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "-1") Long id,
             Principal principal,
             Model model
     ) {
-        Page<Board> paging = boardService.getBoardAll(page);
+        Page<Board> paging;
+
+        if (id == -1) {
+            paging = boardService.getBoardAll(page);
+            model.addAttribute("id", "-1");
+        } else {
+            Category category = categoryService.getCategory(id);
+            paging = boardService.getBoard(page, category);
+            model.addAttribute("category", category.getName());
+        }
+        model.addAttribute("id", id);
         model.addAttribute("paging", paging);
         return "/board/boardList";
     }
@@ -38,7 +52,12 @@ public class BoardController {
     //-- 게시물 생성 폼 --//
     @GetMapping("/create")
 //    @PreAuthorize("isAuthenticated()")
-    public String showCreateForm(BoardCreateForm boardCreateForm) {
+    public String showCreateForm(
+            BoardCreateForm boardCreateForm,
+            Model model
+    ) {
+        List<Category> categories = categoryService.getCategoryAll();
+        model.addAttribute("categories", categories);
         return "/board/create";
     }
 
@@ -52,7 +71,13 @@ public class BoardController {
     ) {
         // 로그인 기능 구현 되면 principal.getName 을 바꿔야 함
         Member member = memberService.getMember("init 글쓴이");
-        boardService.create(boardCreateForm.getTitle(), boardCreateForm.getPost(), member);
+
+        if (boardCreateForm.getCategory() == null)
+            boardService.create(boardCreateForm.getTitle(), boardCreateForm.getPost(), member);
+
+        else
+            boardService.create(boardCreateForm.getTitle(), boardCreateForm.getPost(), member, boardCreateForm.getCategory());
+
         return "redirect:/board/list";
     }
 
@@ -64,7 +89,7 @@ public class BoardController {
             Model model
     ) {
         Board board = boardService.getBoard(id);
-        boardService.viewAdder(board);
+        boardService.addView(board);
 
         model.addAttribute("board", board);
         return "/board/detail";
@@ -105,7 +130,10 @@ public class BoardController {
             @PathVariable Long id,
             Principal principal
     ) {
+        Board board = boardService.getBoard(id);
+        Category category = categoryService.getCategory(board.getCategory().getId());
         boardService.delete(id);
-        return "redirect:/board/list";
+        return "redirect:/board/list?id=" + category.getId();
     }
+
 }
