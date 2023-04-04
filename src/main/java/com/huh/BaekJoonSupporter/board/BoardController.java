@@ -37,10 +37,12 @@ public class BoardController {
 
         if (id == -1) {
             paging = boardService.getBoardAll(page);
-
+            model.addAttribute("id", "-1");
         } else {
             Category category = categoryService.getCategory(id);
             paging = boardService.getBoard(page, category);
+            model.addAttribute("category", category.getName());
+            model.addAttribute("id", category.getId());
         }
         model.addAttribute("paging", paging);
         return "/board/boardList";
@@ -116,7 +118,9 @@ public class BoardController {
             @PathVariable Long id,
             Principal principal
     ) {
+        Board board = boardService.getBoard(id);
+        Category category = categoryService.getCategory(board.getCategory().getId());
         boardService.delete(id);
-        return "redirect:/board/list";
+        return "redirect:/board/list?id=" + category.getId();
     }
 }
