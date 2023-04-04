@@ -1,5 +1,6 @@
 package com.huh.BaekJoonSupporter.board;
 
+import com.huh.BaekJoonSupporter.category.Category;
 import com.huh.BaekJoonSupporter.comment.Comment;
 import com.huh.BaekJoonSupporter.member.Member;
 import jakarta.persistence.*;
@@ -39,11 +40,17 @@ public class Board {
     @ManyToOne(fetch = LAZY)
     private Member member;
 
+    @ManyToOne(fetch = LAZY)
+    public Category category;
+
     @OneToMany(mappedBy = "board")
     @Builder.Default
     private List<Comment> comments = new ArrayList<>();
 
+
     //-- create method --//
+
+    // without category //
     protected static Board create(String title, String post, Member member) {
         Board board = Board
                 .builder()
@@ -54,6 +61,22 @@ public class Board {
                 .build();
 
         member.getBoards().add(board);
+        return board;
+    }
+
+    // create in category //
+    protected static Board create(String title, String post, Member member, Category category) {
+        Board board = Board
+                .builder()
+                .title(title)
+                .post(post)
+                .member(member)
+                .category(category)
+                .view(0)
+                .build();
+
+        member.getBoards().add(board);
+        category.getBoards().add(board);
         return board;
     }
 
