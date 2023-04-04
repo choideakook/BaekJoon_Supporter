@@ -60,7 +60,7 @@ public class BoardService {
     public Long modify(Board board, String title, String post) {
         Board modifiedBoard = board.modify(title, post);
         boardRepository.save(modifiedBoard);
-        return board.getId();
+        return modifiedBoard.getId();
     }
 
     //-- delete --//

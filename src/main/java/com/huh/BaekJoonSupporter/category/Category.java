@@ -39,7 +39,7 @@ public class Category {
     private List<Board> boards = new ArrayList<>();
 
     //-- create method --//
-    protected Category createCategory(String name, String about) {
+    protected static Category createCategory(String name, String about) {
         return Category.builder()
                 .name(name)
                 .about(about)
