@@ -1,6 +1,7 @@
 package com.huh.BaekJoonSupporter.board;
 
 import com.huh.BaekJoonSupporter.DataNotFoundException;
+import com.huh.BaekJoonSupporter.category.Category;
 import com.huh.BaekJoonSupporter.member.Member;
 import com.huh.BaekJoonSupporter.member.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +25,18 @@ public class BoardService {
     private final MemberService memberService;
 
     //-- create board--//
+    // without category //
     @Transactional
     public Long create(String title, String post, Member member) {
         Board board = Board.create(title, post, member);
+        boardRepository.save(board);
+        return board.getId();
+    }
+
+    // create in category //
+    @Transactional
+    public Long create(String title, String post, Member member, Category category) {
+        Board board = Board.create(title, post, member, category);
         boardRepository.save(board);
         return board.getId();
     }

@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-@Component // db 자동 init 하려면 활성화
+//@Component // db 자동 init 하려면 활성화
 @RequiredArgsConstructor
 public class InitDB {
 
@@ -19,7 +19,7 @@ public class InitDB {
         initService.dbInit1();
     }
 
-    @Component
+//    @Component
     @Transactional
     @RequiredArgsConstructor
     static class InitService {
