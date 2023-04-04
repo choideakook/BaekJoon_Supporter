@@ -1,0 +1,42 @@
+<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content" class="p-4">
+
+  <h5 class="text-lg font-semibold mb-4">카테고리 만들기</h5>
+
+  <form method="post"
+        th:object="${categoryForm}"
+        class="space-y-4">
+
+    <input type="hidden"
+           th:name="${_csrf.parameterName}"
+           th:value="${_csrf.token}"/>
+
+    <div class="flex flex-col">
+      <label for="name"
+             class="text-sm font-medium mb-1">카테고리 이름</label>
+      <input type="text"
+             th:field="*{name}"
+             class="border
+                   border-gray-300 py-2 px-3
+                   rounded-lg
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"/>
+    </div>
+    <div class="flex flex-col">
+      <label for="about"
+             class="text-sm font-medium mb-1">카테고리 설명</label>
+      <textarea th:field="*{about}" rows="3"
+                class="border
+                      border-gray-300 py-2 px-3 rounded-lg
+                      focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+    </div>
+
+    <input type="submit"
+           value="저장하기"
+           class="bg-blue-500 text-white py-2 px-4
+               rounded-md hover:bg-blue-600 transition
+               duration-200 ease-in-out cursor-pointer">
+
+  </form>
+
+</div>
+</html>

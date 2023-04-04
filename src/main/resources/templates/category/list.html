@@ -13,6 +13,9 @@
                 <p th:text="${category.about}"
                    class="text-gray-700 mb-6"></p>
 
+                <p th:text="|총 게시글 ${category.boards.size()}|"
+                   class="text-gray-700 mb-6"></p>
+
                 <div class="flex justify-between text-gray-500 text-sm">
                     <span th:text="${#temporals.format(category.createDate, 'yyyy-MM-dd HH:mm')}"></span>
                 </div>
@@ -20,6 +23,12 @@
             </div>
         </a>
     </div>
+    <a href="/category/create"
+       class="bg-blue-500 text-white py-2 px-4
+               rounded-md hover:bg-blue-600 transition
+               duration-200 ease-in-out cursor-pointer">
+        카테고리 만들기
+    </a>
 
 </div>
 </html>

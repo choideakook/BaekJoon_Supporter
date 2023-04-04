@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/board")
@@ -42,8 +43,8 @@ public class BoardController {
             Category category = categoryService.getCategory(id);
             paging = boardService.getBoard(page, category);
             model.addAttribute("category", category.getName());
-            model.addAttribute("id", category.getId());
         }
+        model.addAttribute("id", id);
         model.addAttribute("paging", paging);
         return "/board/boardList";
     }
@@ -51,7 +52,12 @@ public class BoardController {
     //-- 게시물 생성 폼 --//
     @GetMapping("/create")
 //    @PreAuthorize("isAuthenticated()")
-    public String showCreateForm(BoardCreateForm boardCreateForm) {
+    public String showCreateForm(
+            BoardCreateForm boardCreateForm,
+            Model model
+    ) {
+        List<Category> categories = categoryService.getCategoryAll();
+        model.addAttribute("categories", categories);
         return "/board/create";
     }
 
@@ -65,7 +71,13 @@ public class BoardController {
     ) {
         // 로그인 기능 구현 되면 principal.getName 을 바꿔야 함
         Member member = memberService.getMember("init 글쓴이");
-        boardService.create(boardCreateForm.getTitle(), boardCreateForm.getPost(), member);
+
+        if (boardCreateForm.getCategory() == null)
+            boardService.create(boardCreateForm.getTitle(), boardCreateForm.getPost(), member);
+
+        else
+            boardService.create(boardCreateForm.getTitle(), boardCreateForm.getPost(), member, boardCreateForm.getCategory());
+
         return "redirect:/board/list";
     }
 
@@ -77,7 +89,7 @@ public class BoardController {
             Model model
     ) {
         Board board = boardService.getBoard(id);
-        boardService.viewAdder(board);
+        boardService.addView(board);
 
         model.addAttribute("board", board);
         return "/board/detail";
@@ -123,4 +135,5 @@ public class BoardController {
         boardService.delete(id);
         return "redirect:/board/list?id=" + category.getId();
     }
+
 }

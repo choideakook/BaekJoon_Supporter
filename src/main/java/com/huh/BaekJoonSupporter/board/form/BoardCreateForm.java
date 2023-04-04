@@ -1,5 +1,6 @@
 package com.huh.BaekJoonSupporter.board.form;
 
+import com.huh.BaekJoonSupporter.category.Category;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -14,4 +15,6 @@ public class BoardCreateForm {
     private String title;
     @NotEmpty(message = "내용을 입력해주세요.")
     private String post;
+
+    private Category category;
 }

@@ -2,7 +2,6 @@ package com.huh.BaekJoonSupporter.board;
 
 import com.huh.BaekJoonSupporter.DataNotFoundException;
 import com.huh.BaekJoonSupporter.category.Category;
-import com.huh.BaekJoonSupporter.category.CategoryService;
 import com.huh.BaekJoonSupporter.member.Member;
 import com.huh.BaekJoonSupporter.member.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -96,8 +95,13 @@ public class BoardService {
 
     //-- view counter --//
     @Transactional
-    public void viewAdder(Board board) {
+    public void addView(Board board) {
         board.addView();
     }
 
+    //-- recommend counter --//
+    @Transactional
+    public void addRecommend(Member member, Board board){
+
+    }
 }

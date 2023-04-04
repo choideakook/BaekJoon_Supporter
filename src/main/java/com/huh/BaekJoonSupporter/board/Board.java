@@ -31,6 +31,7 @@ public class Board {
     private String title;
     private String post;
     private Integer view;
+    private  int recommend;
 
     @CreatedDate
     private LocalDateTime createDate;
@@ -58,6 +59,7 @@ public class Board {
                 .post(post)
                 .member(member)
                 .view(0)
+                .recommend(0)
                 .build();
 
         member.getBoards().add(board);
@@ -82,16 +84,24 @@ public class Board {
 
     //-- business method --//
 
-    //- modify -//
+    // modify //
     protected Board modify(String title, String post) {
         return this.toBuilder()
                 .title(title)
                 .post(post)
+                .modifyDate(LocalDateTime.now())
                 .build();
     }
 
-    //- view adder -//
+    // view adder //
     protected void addView() {
         this.view++;
+    }
+
+    protected void addRecommend() {
+        this.recommend++;
+    }
+    protected void removeRecommend() {
+        this.recommend--;
     }
 }

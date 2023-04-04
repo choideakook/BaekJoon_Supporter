@@ -34,6 +34,10 @@
             </th>
             <th scope="col"
                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                추천
+            </th>
+            <th scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 조회
             </th>
         </tr>
@@ -70,6 +74,11 @@
             <!-- 작성일 -->
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 <div th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+            </td>
+
+            <!-- 추천 -->
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <div th:text="${board.recommend}?: '0'"></div>
             </td>
 
             <!-- 조회수 -->

@@ -11,6 +11,13 @@
                th:name="${_csrf.parameterName}"
                th:value="${_csrf.token}"/>
 
+<!--        <select th:field="*{category}">-->
+<!--            <option value="">=== 카테고리 선택 ===</option>-->
+<!--            <option th:each="category : ${categories}"-->
+<!--                    th:value="${category}"-->
+<!--                    th:text="${category.name}"></option>-->
+<!--        </select>-->
+
         <div class="flex flex-col">
             <label for="title"
                    class="text-sm font-medium mb-1">제목</label>
