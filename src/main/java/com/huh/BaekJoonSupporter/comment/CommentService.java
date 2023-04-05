@@ -51,6 +51,8 @@ public class CommentService {
 
     // 댓글 삭제 //
     public void delete(Comment comment) {
+        Board board = this.commentRepository.findByBoard(comment);
+        board.getComments().remove(comment);
         this.commentRepository.delete(comment);
     }
 }
