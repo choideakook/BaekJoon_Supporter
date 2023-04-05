@@ -1,0 +1,120 @@
+<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content" class="py-12">
+
+    <div class="">
+        <h5 th:text="${category}?: '모든 게시글'"
+            class="text-lg font-semibold mb-4"></h5>
+
+        <a href="/board/create"
+           class="bg-blue-500 text-white py-2 px-4
+               rounded-md hover:bg-blue-600 transition
+               duration-200 ease-in-out cursor-pointer">
+            게시물 등록
+        </a>
+    </div>
+
+    <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+        <tr>
+            <th scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                번호
+            </th>
+            <th scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/2">
+                제목
+            </th>
+            <th scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                글쓴이
+            </th>
+            <th scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                작성일
+            </th>
+            <th scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                추천
+            </th>
+            <th scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                조회
+            </th>
+        </tr>
+        </thead>
+
+        <tbody class="bg-white divide-y divide-gray-200">
+        <tr th:each="board, loop : ${paging}">
+
+            <!-- 게시물 번호 -->
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900"
+                     th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></div>
+            </td>
+
+            <!-- 게시글 + 댓글 수 -->
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">
+                    <a th:href="@{|/board/detail/${board.id}|}"
+                       th:text="${board.title}"
+                       class="text-indigo-600 hover:text-indigo-900"></a>
+                    <span th:if="${#lists.size(board.comments) > 0}"
+                          th:text="${#lists.size((board.comments))}"
+                          class="ml-1 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800"></span>
+                </div>
+            </td>
+
+            <!-- 글쓴이 -->
+            <td class="px-6 py-4 whitespace-nowrap">
+            <span th:if="${board.member != null}"
+                  th:text="${board.member.name}"
+                  class="text-sm text-gray-500"></span>
+            </td>
+
+            <!-- 작성일 -->
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <div th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+            </td>
+
+            <!-- 추천 -->
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <div th:text="${board.recommend}?: '0'"></div>
+            </td>
+
+            <!-- 조회수 -->
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <div th:text="${board.view}?: '0'"></div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- 페이징 처리 시작 -->
+    <div th:if="${!paging.isEmpty()}"
+         class="pagination flex justify-center space-x-2">
+
+        <a th:href="@{|?page=${paging.number - 1}&id=${id}|}"
+           class="px-2 py-1 bg-gray-200 text-gray-800 rounded"
+           th:classappend="${!paging.hasPrevious} ? 'sr-only'">
+            이전
+        </a>
+
+        <span th:each="page: ${#numbers.sequence(0, paging.totalPages - 1)}"
+              class="px-2 py-1 bg-gray-200 text-gray-800 rounded hover:bg-gray-400"
+              th:classappend="${page == paging.number} ? 'active'"
+              th:if="${page >= paging.number - 5 and page <= paging.number + 5}">
+
+            <a th:text="${page + 1}" th:href="@{|?page=${page}&id=${id}|}"></a>
+        </span>
+
+        <a th:href="@{|?page=${paging.number + 1}&id=${id}|}"
+           class="px-2 py-1 bg-gray-200 text-gray-800 rounded"
+           th:classappend="${!paging.hasNext} ? 'sr-only'">
+            다음
+        </a>
+
+    </div>
+    <!-- 페이징 처리 종료 -->
+
+</div>
+</html>

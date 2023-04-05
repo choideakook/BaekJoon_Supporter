@@ -32,13 +32,12 @@ public class MemberService {
         }
     }
 
-    public void modify(String name, String password, String token) {
-        Member member = Member.builder()
-                .name(name)
+    public void modify(Member member, String password, String token) {
+        Member member1 = member.toBuilder()
                 .password(passwordEncoder.encode(password))
                 .token(token)
                 .build();
-        memberRepository.save(member);
+        memberRepository.save(member1);
     }
 
     public void delete(Member member) {
