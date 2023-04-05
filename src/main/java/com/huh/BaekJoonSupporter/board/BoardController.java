@@ -3,6 +3,7 @@ package com.huh.BaekJoonSupporter.board;
 import com.huh.BaekJoonSupporter.board.form.BoardCreateForm;
 import com.huh.BaekJoonSupporter.category.Category;
 import com.huh.BaekJoonSupporter.category.CategoryService;
+import com.huh.BaekJoonSupporter.comment.CommentForm;
 import com.huh.BaekJoonSupporter.member.Member;
 import com.huh.BaekJoonSupporter.member.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -85,6 +86,7 @@ public class BoardController {
     @GetMapping("/detail/{id}")
     public String showDetail(
             @PathVariable Long id,
+            CommentForm commentForm,
             Principal principal,
             Model model
     ) {
@@ -92,7 +94,7 @@ public class BoardController {
         boardService.addView(board);
 
         model.addAttribute("board", board);
-        return "/board/detail";
+        return "board/detail";
     }
 
     //-- 게시물 수정 폼 --//

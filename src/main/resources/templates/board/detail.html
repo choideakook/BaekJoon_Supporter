@@ -2,6 +2,6 @@
 <div layout:fragment="content" class="py-12">
 
   <div th:replace="~{board/boardTemplate/getBoard :: details (${board})}"></div>
-
+  <div th:replace="~{comment/comment :: details (${commentForm})}"></div>
 </div>
 </html>
