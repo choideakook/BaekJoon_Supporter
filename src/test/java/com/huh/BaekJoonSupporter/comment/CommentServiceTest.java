@@ -38,7 +38,7 @@ class CommentServiceTest {
     @Rollback(value = false)
     void CommentTests(){
         // 댓글 생성
-        Comment comment = this.commentService.create("댓글", boardService.getBoard(10L), memberService.getMember("park"));
+        Comment comment = this.commentService.create("테스트 댓글", boardService.getBoard(10L), memberService.getMember("park"));
         assertThat(comment.getContent()).isEqualTo("댓글");
 
 //         댓글 수정

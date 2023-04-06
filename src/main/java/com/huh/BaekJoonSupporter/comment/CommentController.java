@@ -41,7 +41,7 @@ public class CommentController {
             return "board/detail";// 게시글 html 리턴
         }
         Comment comment = this.commentService.create(commentForm.getComment(), board, board.getMember()); // 답변 저장
-        return String.format("redirect:/board/detail", comment.getBoard().getId(), comment.getId()); // 게시글 번호 입력 받아서 게사글로 이동
+        return String.format("redirect:/board/detail/%s#comment_%s", comment.getBoard().getId(), comment.getId()); // 게시글 번호 입력 받아서 게사글로 이동
     }
 
     // 댓글 수정 GET 메서드 // 확인 필요!!
