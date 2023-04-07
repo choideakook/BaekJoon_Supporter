@@ -18,7 +18,7 @@ public class MemberController {
     @PreAuthorize("isAnonymous()")
     @GetMapping("/signup")
     public String signup() {
-        return "signup_form";
+        return "/member/signup_form";
     }
 
     @PreAuthorize("isAnonymous()")
@@ -31,6 +31,6 @@ public class MemberController {
     @PreAuthorize("isAnonymous()")
     @GetMapping("/login")
     public String login() {
-        return "login_form";
+        return "/member/login_form";
     }
 }

@@ -1,0 +1,7 @@
+<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content" class="py-12">
+
+  <div th:replace="~{board/boardTemplate/getBoard :: details (${board})}"></div>
+  <div th:replace="~{comment/comment :: details (${commentForm})}"></div>
+</div>
+</html>

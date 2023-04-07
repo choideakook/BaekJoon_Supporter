@@ -1,5 +1,6 @@
 package com.huh.BaekJoonSupporter.board;
 
+import com.huh.BaekJoonSupporter.category.Category;
 import com.huh.BaekJoonSupporter.comment.Comment;
 import com.huh.BaekJoonSupporter.member.Member;
 import jakarta.persistence.*;
@@ -29,6 +30,8 @@ public class Board {
 
     private String title;
     private String post;
+    private Integer view;
+    private  int recommend;
 
     @CreatedDate
     private LocalDateTime createDate;
@@ -38,29 +41,67 @@ public class Board {
     @ManyToOne(fetch = LAZY)
     private Member member;
 
+    @ManyToOne(fetch = LAZY)
+    public Category category;
+
     @OneToMany(mappedBy = "board")
+    @Builder.Default
     private List<Comment> comments = new ArrayList<>();
 
+
     //-- create method --//
-    public static Board create(String title, String post, Member member) {
+
+    // without category //
+    protected static Board create(String title, String post, Member member) {
         Board board = Board
                 .builder()
                 .title(title)
                 .post(post)
                 .member(member)
+                .view(0)
+                .recommend(0)
                 .build();
 
         member.getBoards().add(board);
         return board;
     }
 
+    // create in category //
+    protected static Board create(String title, String post, Member member, Category category) {
+        Board board = Board
+                .builder()
+                .title(title)
+                .post(post)
+                .member(member)
+                .category(category)
+                .view(0)
+                .build();
+
+        member.getBoards().add(board);
+        category.getBoards().add(board);
+        return board;
+    }
+
     //-- business method --//
 
-    //- modify -//
-    public Board modify(String title, String post) {
+    // modify //
+    protected Board modify(String title, String post) {
         return this.toBuilder()
                 .title(title)
                 .post(post)
+                .modifyDate(LocalDateTime.now())
                 .build();
+    }
+
+    // view adder //
+    protected void addView() {
+        this.view++;
+    }
+
+    protected void addRecommend() {
+        this.recommend++;
+    }
+    protected void removeRecommend() {
+        this.recommend--;
     }
 }
