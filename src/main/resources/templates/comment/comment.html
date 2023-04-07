@@ -1,0 +1,40 @@
+<!--<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">-->
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"/>-->
+<!--<div layout:fragment="content" class="py-12">-->
+<!--<html xmlns:th="http://www.thymeleaf.org" >-->
+<div th:fragment="details (commentForm)">
+  <!-- 댓글 작성 -->
+  <div class="max-w-3xl mx-auto my-10">
+    <h2 class="text-xl font-bold mb-5">댓글</h2>
+    <form class="my-3" th:object="${commentForm}" method="post">
+      <input type="hidden"
+             th:name="${_csrf.parameterName}"
+             th:value="${_csrf.token}"/>
+      <label for="content" class="block text-gray-700 font-bold mb-2">댓글 작성</label>
+      <textarea th:field="*{comment}" class="w-full rounded-md p-2 border border-gray-400 mb-5"></textarea>
+      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">작성하기</button>
+    </form>
+  </div>
+</div>
+<!--  댓글작성 끝 -->
+
+
+        <!--  댓글 리스트 -->
+<!--  <div th:if="${board.comments != null}">-->
+<!--    <ul>-->
+<!--      <li th:each="comment : ${board.comments}" th:text="${comment.content}"></li>-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--        <div class="bg-white p-5 rounded-lg shadow-lg" th:each="comment : ${board.comments}">-->
+<!--          <a th:id="|comment_${comment.id}"></a>-->
+<!--            <div class="mb-5">-->
+<!--                <h3 class="font-bold">댓글 작성자 1</h3>-->
+<!--                <p class="text-gray-600">댓글 내용 1</p>-->
+<!--                <span class="text-gray-500 text-sm">작성일시: 2023년 3월 30일 오후 3시 20분</span>-->
+<!--            </div>-->
+<!--        </div>-->
+
+    <!-- 댓글 리스트 끝 -->
+    <!-- 게시판 댓글 끝 -->
+
+<!--</html>-->
