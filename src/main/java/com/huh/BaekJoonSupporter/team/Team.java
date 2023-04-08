@@ -15,7 +15,7 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor
 public class Team {
@@ -24,25 +24,20 @@ public class Team {
 
     private Long leaderId;
 
+    @Column(unique = true)
     private String teamName;
 
     @OneToOne
     private Line line;
 
     @OneToMany
+    @Builder.Default
     private List<TeamRule> teamRules = new ArrayList<>();
 
     @OneToMany(mappedBy = "team")
+    @Builder.Default
     private List<Member> members = new ArrayList<>();
 
     private LocalDateTime createDate;
     private LocalDateTime modifyDate;
-
-    @Builder
-    public Team(Long id, Long leaderId, String teamName, Line line, LocalDateTime createDate) {
-        this.leaderId = leaderId;
-        this.teamName = teamName;
-        this.line = line;
-        this.createDate = createDate;
-    }
 }

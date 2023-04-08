@@ -14,16 +14,25 @@ import java.util.Optional;
 public class TeamService {
     private final TeamRepository teamRepository;
 
-    public Team create(Long leaderId, String teamName, Line line, Member leader, LocalDateTime createDate) {
+    public Team create(Long leaderId, String teamName, Line line, Member leader) {
         Team team = Team.builder()
                 .leaderId(leaderId)
                 .teamName(teamName)
                 .line(line)
-                .createDate(createDate)
+                .createDate(LocalDateTime.now())
                 .build();
-        team.getMembers().add(leader);
+        team.getMembers().add(leader); // 리더 등록 시 멤버 등록도 동시에 이뤄져야함
         this.teamRepository.save(team);
         return team;
+    }
+
+    public Team getTeam(String teamName) {
+        Optional<Team> team = this.teamRepository.findByTeamName(teamName);
+        if(team.isPresent()) {
+            return team.get();
+        } else {
+            throw new DataNotFoundException("comment not found");
+        }
     }
 
     public Team getTeam(Long id) {
@@ -35,14 +44,13 @@ public class TeamService {
         }
     }
 
-    public void modify(Long leaderId, String teamName, Line line, LocalDateTime modifyDate) {
-        Team team = Team.builder()
-                .leaderId(leaderId)
+    public void modify(Team team, String teamName, Line line) {
+        Team modifyTeam = team.toBuilder()
                 .teamName(teamName)
                 .line(line)
-                .modifyDate(modifyDate)
+                .modifyDate(LocalDateTime.now())
                 .build();
-        this.teamRepository.save(team);
+        this.teamRepository.save(modifyTeam);
     }
 
     public void delete(Team team) {
@@ -51,6 +59,7 @@ public class TeamService {
 
     public void addMember(Team team, Member member) {
         team.getMembers().add(member);
+        this.teamRepository.save(team);
     }
 }
 
