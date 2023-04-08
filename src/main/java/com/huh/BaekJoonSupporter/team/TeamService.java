@@ -26,7 +26,7 @@ public class TeamService {
         return team;
     }
 
-    public Team getTeam(String teamName) {
+    public Team  getTeam(String teamName) {
         Optional<Team> team = this.teamRepository.findByTeamName(teamName);
         if(team.isPresent()) {
             return team.get();
