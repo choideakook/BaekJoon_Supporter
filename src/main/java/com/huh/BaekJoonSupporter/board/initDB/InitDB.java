@@ -18,7 +18,7 @@ public class InitDB {
 
     @PostConstruct
     public void init1() {
-//        initService.initBoard();
+        initService.initBoard();
         initService.initCategory();
     }
 
