@@ -15,7 +15,6 @@ public class TeamRule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     // 해시 사용 대비 남겨두기
 //    @ElementCollection // 해시맵 필드 선언
 //    @CollectionTable(name="team_rule_table") //DB에서 사용할 테이블 이름
@@ -30,8 +29,15 @@ public class TeamRule {
     private String difficulty;
 // 목표 문제 풀이 개수
     private Long targetNumber;
-    private String ruleName;
+
     @ManyToOne
     @ToString.Exclude
     private Team team;
 }
+
+
+/**
+ *  o 문제 푼수 o 난이도별 문제수
+ *  input => Integer type 입력 받고
+ *  String , Object
+ */
