@@ -25,8 +25,8 @@ public class User {
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    private TeamRule teamRule;
-    /**
-    *  teamrule 에서
-     *  푼문제수, 난이도별 문제 값을 얻어 가야함 teamrule 은 단순 DTO/VO/DAO ?
-     */
+    
+    @Enumerated(EnumType.STRING)
+    private SolvedStatus solvedStatus;  // 성공 , 실패 여부
+
 }
