@@ -1,0 +1,64 @@
+<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>팀 규칙 정하기</title>
+</head>
+
+<body>
+
+<script>
+
+
+</script>
+
+<main layout:fragment="content">
+    <form th:action method="POST" class="p-10 max-w-sm flex flex-col gap-4"
+          onsubmit="AddForm__submit(this); return false;">
+        <div>
+            <div class="form-control">
+                <label class="label cursor-pointer">
+                    <span class="label-text">난이도 관계 없이 문제 풀기</span>
+                    <input type="radio" name="target" value="1" class="radio focus:bg-red-100">
+                </label>
+            </div>
+            <div class="form-control">
+                <label class="label cursor-pointer">
+                    <span class="label-text">난이도별 문제 풀기</span>
+                    <input type="radio" name="target" value="2" class="radio focus:bg-red-100">
+                </label>
+            </div>
+        </div>
+        <label>난이도 선택</label>
+        <select>
+            <option value="">-- 선택하세요 --</option>
+            <option value="Bronze">Bronze</option>
+            <option value="Silver">Silver</option>
+            <option value="Gold">Gold</option>
+            <option value="Platinum">Platinum</option>
+            <option value="Diamond">Diamond</option>
+            <option value="Ruby">Ruby</option>
+        </select>
+
+        <label>목표 갯수 선택</label>
+        <select>
+            <option value="">-- 선택하세요 --</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+        <div>
+            <input type="submit" value="목표 등록" class="btn btn-primary">
+        </div>
+    </form>
+
+</main>
+</body>
+
+</html>
