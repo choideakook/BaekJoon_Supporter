@@ -29,6 +29,7 @@ public class TeamRule {
     private String difficulty;
 // 목표 문제 풀이 개수
     private Long targetNumber;
+
     @ManyToOne
     @ToString.Exclude
     private Team team;
@@ -36,7 +37,7 @@ public class TeamRule {
 
 
 /**
-*  o 문제 푼수 o 난이도별 문제수
+ *  o 문제 푼수 o 난이도별 문제수
  *  input => Integer type 입력 받고
  *  String , Object
  */

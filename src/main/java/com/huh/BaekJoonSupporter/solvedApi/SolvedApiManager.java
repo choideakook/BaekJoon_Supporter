@@ -1,14 +1,21 @@
 package com.huh.BaekJoonSupporter.solvedApi;
 
 import com.huh.BaekJoonSupporter.member.MemberRepository;
+import lombok.Builder;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
@@ -26,29 +33,50 @@ public class SolvedApiManager {
     private String getUserInformation() throws UnsupportedEncodingException {
         return BASE_URL +
                 api_user +
-                api_handle;
+                api_handle + "wy9295";
     }
 
     private String getProblemStats() throws UnsupportedEncodingException{
         RestTemplate restTemplate = new RestTemplate();
         return BASE_URL +
                 api_problem +
-                api_handle;
+                api_handle + "wy9295";
     }
 
-    public ResponseEntity<?> fetch() throws UnsupportedEncodingException{
+
+    //==문제풀이 로직==//
+    public String  getSolvedCount() throws IOException, ParseException {
         RestTemplate restTemplate = new RestTemplate();
-        HttpEntity<?> entity = new HttpEntity<>(new HttpHeaders());
-        ResponseEntity<Map> resultMap = restTemplate.exchange(getUserInformation() + "wy9295", HttpMethod.GET, entity, Map.class);
-        System.out.println(resultMap.getBody());
-        return resultMap;
+        String jsonString = restTemplate.getForObject(getUserInformation(), String.class);
+
+        JSONParser jsonParser = new JSONParser();
+        Object jsonObject = jsonParser.parse(jsonString);
+
+        JSONObject jsonBody = (JSONObject) jsonObject;
+
+        return jsonBody.get("solvedCount").toString();
     }
 
-    public List<Map<String, Object>> problemfech() throws UnsupportedEncodingException{
+    public JSONArray getProblemCount() throws IOException, ParseException {
         RestTemplate restTemplate = new RestTemplate();
-        HttpEntity<?> entity = new HttpEntity<>(new HttpHeaders());
-        ResponseEntity<List<Map<String, Object>>> resultMap = restTemplate.exchange(getProblemStats() + "wy9295", HttpMethod.GET, entity, new ParameterizedTypeReference<List<Map<String, Object>>>(){});
-        System.out.println(resultMap.getBody());
-        return resultMap.getBody();
+        String jsonString = restTemplate.getForObject(getProblemStats(), String.class);
+
+        JSONParser jsonParser = new JSONParser();
+        Object jsonObject = jsonParser.parse(jsonString);
+
+        return (JSONArray) jsonObject;
+    }
+
+    //==Dto 저장==//
+    private UserDto makeUserDto(JSONObject obj) {
+        return UserDto.builder()
+                .solvedCount((Integer) obj.get("solvedCount"))
+                .build();
+    }
+
+    private ProblemDto makeProblemDto(JSONObject obj) {
+        return ProblemDto.builder()
+                .solved((Integer) obj.get("solved"))
+                .build();
     }
 }
