@@ -1,8 +1,46 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="py-12 flex justify-center">
 
+    <script>
+        function LoginForm__submit(form) {
+            // username 이(가) 올바른지 체크
+
+            form.username.value = form.username.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
+
+            if (form.username.value.length == 0) {
+                alert('아이디를 입력해주세요.');
+                form.username.focus();
+                return;
+            }
+
+            if (form.username.value.length < 4) {
+                alert('아이디를 4자 이상 입력해주세요.');
+                form.username.focus();
+                return;
+            }
+
+            // password 이(가) 올바른지 체크
+
+            form.password.value = form.password.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
+
+            if (form.password.value.length == 0) {
+                form.password.focus();
+                alert('비밀번호를 입력해주세요.');
+                return;
+            }
+
+            if (form.password.value.length < 4) {
+                alert('비밀번호를 4자 이상 입력해주세요.');
+                form.password.focus();
+                return;
+            }
+
+            form.submit(); // 폼 발송
+        }
+    </script>
+
     <div class="max-w-xs">
-        <form th:action="@{/member/login}" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form th:action="@{/member/login}" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="LoginForm__submit(this); return false;">
             <div class="mb-4">
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="아이디">
             </div>

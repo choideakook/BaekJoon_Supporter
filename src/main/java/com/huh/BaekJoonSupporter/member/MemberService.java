@@ -14,13 +14,13 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public void create(String name, String password, String token) {
+    public Member create(String name, String password, String token) {
         Member member = Member.builder()
                 .name(name)
                 .password(passwordEncoder.encode(password))
                 .token(token)
                 .build();
-        memberRepository.save(member);
+        return memberRepository.save(member);
     }
 
     public Member getMember(String name) {
