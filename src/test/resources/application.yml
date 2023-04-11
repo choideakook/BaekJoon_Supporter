@@ -1,7 +1,0 @@
-spring:
-
-logging.level:
-  org.hibernate:
-    SQL: debug
-#    type: trace # (Spring boot 2.X.X)
-    orm.jdbc.bind: trace # (Spring boot 3.X.X)

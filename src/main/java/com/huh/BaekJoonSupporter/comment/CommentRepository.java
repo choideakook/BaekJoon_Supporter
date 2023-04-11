@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
     Optional<Comment> findByContent(String content);
-    Board findByBoard(Comment comment);
+    Optional<Comment> findByBoard(Comment comment);
 }
