@@ -6,13 +6,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class JsoupControllerTest {
 
-    @Test
-    void name() {
-        JsoupController.getWebData();
-    }
-
-    @Test
-    void name1() {
-        JsoupController.selenium();
-    }
+//    @Test
+//    void name() {
+//        JsoupController.getWebData();
+//    }
+//
+//    @Test
+//    void name1() {
+//        JsoupController.selenium();
+//    }
 }

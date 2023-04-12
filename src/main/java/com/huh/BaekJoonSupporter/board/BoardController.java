@@ -71,7 +71,7 @@ public class BoardController {
             Principal principal
     ) {
         // 로그인 기능 구현 되면 principal.getName 을 바꿔야 함
-        Member member = memberService.getMember("init 글쓴이");
+        Member member = memberService.getMember("user1");
 
         if (boardCreateForm.getCategory() == null)
             boardService.create(boardCreateForm.getTitle(), boardCreateForm.getPost(), member);

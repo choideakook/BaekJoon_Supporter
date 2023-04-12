@@ -33,7 +33,7 @@ class CategoryServiceTest {
     }
 
     @Test
-    void save_modify() {
+    void 카테고리_생성과_수정() {
         Long categoryId = categoryService.create("categoryA", "aboutA");
         Category category = categoryService.getCategory(categoryId);
 
@@ -52,7 +52,7 @@ class CategoryServiceTest {
     }
 
     @Test
-    void delete_getAll() {
+    void 모든_카테고리_조회() {
         Long categoryId1 = categoryService.create("categoryA", "aboutA");
         Long categoryId2 = categoryService.create("categoryA", "aboutA");
         categoryService.getCategory(categoryId1);
