@@ -16,5 +16,6 @@ public class BoardCreateForm {
     @NotEmpty(message = "내용을 입력해주세요.")
     private String post;
 
-    private Category category;
+    private String categoryName;
+
 }

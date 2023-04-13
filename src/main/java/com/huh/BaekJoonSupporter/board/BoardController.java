@@ -57,8 +57,10 @@ public class BoardController {
             BoardCreateForm boardCreateForm,
             Model model
     ) {
+        log.info("게시물 생성 폼 요청 확인");
         List<Category> categories = categoryService.getCategoryAll();
         model.addAttribute("categories", categories);
+        log.info("게시물 생성 폼 응답");
         return "/board/create";
     }
 
@@ -70,16 +72,20 @@ public class BoardController {
             BindingResult bindingResult,
             Principal principal
     ) {
+        log.info("게시물 생성 요청 확인");
         // 로그인 기능 구현 되면 principal.getName 을 바꿔야 함
         Member member = memberService.getMember("user1");
+        Long categoryId = null;
 
-        if (boardCreateForm.getCategory() == null)
+        if (boardCreateForm.getCategoryName().equals(""))
             boardService.create(boardCreateForm.getTitle(), boardCreateForm.getPost(), member);
 
-        else
-            boardService.create(boardCreateForm.getTitle(), boardCreateForm.getPost(), member, boardCreateForm.getCategory());
-
-        return "redirect:/board/list";
+        else {
+            Category category = categoryService.getCategory(boardCreateForm.getCategoryName());
+            boardService.create(boardCreateForm.getTitle(), boardCreateForm.getPost(), member, category);
+            categoryId = category.getId();
+        }
+        return "redirect:/board/list?id=" + categoryId;
     }
 
     //-- 게시물 상세 --//
