@@ -50,7 +50,7 @@ public class TeamRuleServiceTest {
 
         // Create
         TeamRule teamRule = teamRuleService.create(team, "aaa", "mnmm", 5L);
-        TeamRule temp = teamRuleService.getTeamRule(1L);
+        TeamRule temp = teamRuleService.getTeamRule(leader.getId());
 
         assertThat(teamRule).isEqualTo(temp);
 
