@@ -66,5 +66,7 @@ class CommentServiceTest {
         commentService.delete(comment12);
         assertTrue(!comment12.getContent().isEmpty());
         assertThat(comment12.getBoard().getComments()).isEqualTo(comment3.getBoard().getComments());
+        assertThat(comment12.getBoard().getComments().size()).isEqualTo(0);
+
     }
 }
