@@ -29,7 +29,6 @@ public class TeamRule {
     private String difficulty;
 // 목표 문제 풀이 개수
     private Long targetNumber;
-
     @ManyToOne
     @ToString.Exclude
     private Team team;
