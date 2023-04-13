@@ -1,0 +1,45 @@
+<div th:fragment="details (board)">
+
+    <div class="max-w-4xl mx-auto p-8">
+
+        <h1 th:text="(${board.category} eq null)? '자유 게시물':${board.category.name}"
+            class="text-4xl font-bold mb-4"></h1>
+
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="px-6 py-4">
+                <h2 class="text-2xl font-bold mb-2"
+                    th:text="${board.title}"></h2>
+                <p class="text-gray-700 text-base"
+                   th:text="${board.post}"></p>
+            </div>
+
+            <div class="bg-gray-100 px-6 py-4">
+                <span th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"
+                      class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+                </span>
+
+                <span th:if="${board.createDate ge board.modifyDate}"
+                      th:text="${#temporals.format(board.modifyDate, 'yyyy-MM-dd HH:mm')}"
+                      class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+                </span>
+
+                <a onclick="return confirm('준비 중입니다.');">
+                    <span th:text="| 추천 ${board.recommend}|"
+                          class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+                    </span>
+                </a>
+
+                <span th:text="|조회 ${board.view}|"
+                      class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
+                </span>
+            </div>
+        </div>
+        <div class="mt-4">
+            <a href="/board/list" class="text-blue-500">목록으로 돌아가기</a>
+            <a onclick="return confirm('정말로 삭제하시겠습니까?');"
+               th:href="@{|/board/delete/${board.id}|}" class="text-blue-500"> / 게시물 삭제</a>
+            <a th:href="@{|/board/update/${board.id}|}" class="text-blue-500"> / 게시물 수정</a>
+        </div>
+    </div>
+
+</div>

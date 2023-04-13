@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.huh.BaekJoonSupporter.board.BoardServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-04-01T08:38:16" hostname="choedaegug-ui-MacBookPro.local" time="0.215">
+  <properties/>
+  <testcase name="save_test()" classname="com.huh.BaekJoonSupporter.board.BoardServiceTest" time="0.215"/>
+  <system-out><![CDATA[17:38:13.491 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Neither @ContextConfiguration nor @ContextHierarchy found for test class [BoardServiceTest]: using SpringBootContextLoader
+17:38:13.493 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader -- Could not detect default resource locations for test class [com.huh.BaekJoonSupporter.board.BoardServiceTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+17:38:13.493 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.huh.BaekJoonSupporter.board.BoardServiceTest]: BoardServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+17:38:13.504 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Using ContextCustomizers for test class [BoardServiceTest]: [DisableObservabilityContextCustomizer, PropertyMappingContextCustomizer, Customizer, ExcludeFilterContextCustomizer, DuplicateJsonObjectContextCustomizer, MockitoContextCustomizer, TestRestTemplateContextCustomizer]
+17:38:13.544 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider -- Identified candidate component class: file [/Users/choedaegug/Desktop/대국이/Coding/practice/team/BaekJoon_Supporter/build/classes/java/main/com/huh/BaekJoonSupporter/BaekJoonSupporterApplication.class]
+17:38:13.547 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.huh.BaekJoonSupporter.BaekJoonSupporterApplication for test class com.huh.BaekJoonSupporter.board.BoardServiceTest
+17:38:13.592 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Using TestExecutionListeners for test class [BoardServiceTest]: [ServletTestExecutionListener, DirtiesContextBeforeModesTestExecutionListener, ApplicationEventsTestExecutionListener, MockitoTestExecutionListener, DependencyInjectionTestExecutionListener, DirtiesContextTestExecutionListener, TransactionalTestExecutionListener, SqlScriptsTestExecutionListener, EventPublishingTestExecutionListener, RestDocsTestExecutionListener, MockRestServiceServerResetTestExecutionListener, MockMvcPrintOnlyOnFailureTestExecutionListener, WebDriverTestExecutionListener, MockWebServiceServerTestExecutionListener, ResetMocksTestExecutionListener]
+17:38:13.592 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener -- Before test class: class [BoardServiceTest], class annotated with @DirtiesContext [false] with mode [null]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.0.5)
+
+2023-04-01T17:38:13.755+09:00  INFO 18767 --- [    Test worker] c.h.B.board.BoardServiceTest             : Starting BoardServiceTest using Java 17.0.6 with PID 18767 (started by choedaegug in /Users/choedaegug/Desktop/대국이/Coding/practice/team/BaekJoon_Supporter)
+2023-04-01T17:38:13.756+09:00  INFO 18767 --- [    Test worker] c.h.B.board.BoardServiceTest             : No active profile set, falling back to 1 default profile: "default"
+2023-04-01T17:38:14.063+09:00  INFO 18767 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-01T17:38:14.092+09:00  INFO 18767 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 25 ms. Found 5 JPA repository interfaces.
+2023-04-01T17:38:14.324+09:00  INFO 18767 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-01T17:38:14.350+09:00  INFO 18767 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-04-01T17:38:14.486+09:00  INFO 18767 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-04-01T17:38:14.658+09:00  INFO 18767 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@18d610e1
+2023-04-01T17:38:14.659+09:00  INFO 18767 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-04-01T17:38:14.697+09:00  INFO 18767 --- [    Test worker] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-04-01T17:38:15.120+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table board 
+       drop 
+       foreign key FKsds8ox89wwf6aihinar49rmfy
+Hibernate: 
+    
+    alter table board 
+       drop 
+       foreign key FKsds8ox89wwf6aihinar49rmfy
+2023-04-01T17:38:15.140+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table comment 
+       drop 
+       foreign key FKlij9oor1nav89jeat35s6kbp1
+Hibernate: 
+    
+    alter table comment 
+       drop 
+       foreign key FKlij9oor1nav89jeat35s6kbp1
+2023-04-01T17:38:15.154+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table comment 
+       drop 
+       foreign key FKmrrrpi513ssu63i2783jyiv9m
+Hibernate: 
+    
+    alter table comment 
+       drop 
+       foreign key FKmrrrpi513ssu63i2783jyiv9m
+2023-04-01T17:38:15.161+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table line 
+       drop 
+       foreign key FKeomim8ovxkcruom7cgbewp29t
+Hibernate: 
+    
+    alter table line 
+       drop 
+       foreign key FKeomim8ovxkcruom7cgbewp29t
+2023-04-01T17:38:15.171+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table member 
+       drop 
+       foreign key FKcjte2jn9pvo9ud2hyfgwcja0k
+Hibernate: 
+    
+    alter table member 
+       drop 
+       foreign key FKcjte2jn9pvo9ud2hyfgwcja0k
+2023-04-01T17:38:15.178+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table team 
+       drop 
+       foreign key FKgciv1uqtys0w4lji435apk2v9
+Hibernate: 
+    
+    alter table team 
+       drop 
+       foreign key FKgciv1uqtys0w4lji435apk2v9
+2023-04-01T17:38:15.187+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table team_team_rules 
+       drop 
+       foreign key FKqq87y5ihqyox9wr3wh7n9xadh
+Hibernate: 
+    
+    alter table team_team_rules 
+       drop 
+       foreign key FKqq87y5ihqyox9wr3wh7n9xadh
+2023-04-01T17:38:15.193+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table team_team_rules 
+       drop 
+       foreign key FKmm4kdrhdl5ubywcge9f2xw2ow
+Hibernate: 
+    
+    alter table team_team_rules 
+       drop 
+       foreign key FKmm4kdrhdl5ubywcge9f2xw2ow
+2023-04-01T17:38:15.200+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table team_rule 
+       drop 
+       foreign key FK4osspsg46u72e62uk4d265amf
+Hibernate: 
+    
+    alter table team_rule 
+       drop 
+       foreign key FK4osspsg46u72e62uk4d265amf
+2023-04-01T17:38:15.206+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists board
+Hibernate: 
+    
+    drop table if exists board
+2023-04-01T17:38:15.213+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists comment
+Hibernate: 
+    
+    drop table if exists comment
+2023-04-01T17:38:15.222+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists line
+Hibernate: 
+    
+    drop table if exists line
+2023-04-01T17:38:15.229+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists member
+Hibernate: 
+    
+    drop table if exists member
+2023-04-01T17:38:15.236+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists team
+Hibernate: 
+    
+    drop table if exists team
+2023-04-01T17:38:15.242+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists team_team_rules
+Hibernate: 
+    
+    drop table if exists team_team_rules
+2023-04-01T17:38:15.249+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    drop table if exists team_rule
+Hibernate: 
+    
+    drop table if exists team_rule
+2023-04-01T17:38:15.256+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table board (
+       id bigint not null auto_increment,
+        create_date datetime(6),
+        modify_date datetime(6),
+        post varchar(255),
+        title varchar(255),
+        member_id bigint,
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    
+    create table board (
+       id bigint not null auto_increment,
+        create_date datetime(6),
+        modify_date datetime(6),
+        post varchar(255),
+        title varchar(255),
+        member_id bigint,
+        primary key (id)
+    ) engine=InnoDB
+2023-04-01T17:38:15.268+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table comment (
+       id bigint not null auto_increment,
+        content TEXT,
+        create_date datetime(6),
+        modify_date datetime(6),
+        board_id bigint,
+        member_id bigint,
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    
+    create table comment (
+       id bigint not null auto_increment,
+        content TEXT,
+        create_date datetime(6),
+        modify_date datetime(6),
+        board_id bigint,
+        member_id bigint,
+        primary key (id)
+    ) engine=InnoDB
+2023-04-01T17:38:15.279+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table line (
+       id bigint not null auto_increment,
+        token varchar(255),
+        team_id bigint,
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    
+    create table line (
+       id bigint not null auto_increment,
+        token varchar(255),
+        team_id bigint,
+        primary key (id)
+    ) engine=InnoDB
+2023-04-01T17:38:15.290+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table member (
+       id bigint not null auto_increment,
+        name varchar(255),
+        password varchar(255),
+        token varchar(255),
+        team_id bigint,
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    
+    create table member (
+       id bigint not null auto_increment,
+        name varchar(255),
+        password varchar(255),
+        token varchar(255),
+        team_id bigint,
+        primary key (id)
+    ) engine=InnoDB
+2023-04-01T17:38:15.305+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table team (
+       id bigint not null auto_increment,
+        create_date datetime(6),
+        leader_id bigint,
+        modify_date datetime(6),
+        team_name varchar(255),
+        line_id bigint,
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    
+    create table team (
+       id bigint not null auto_increment,
+        create_date datetime(6),
+        leader_id bigint,
+        modify_date datetime(6),
+        team_name varchar(255),
+        line_id bigint,
+        primary key (id)
+    ) engine=InnoDB
+2023-04-01T17:38:15.317+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table team_team_rules (
+       team_id bigint not null,
+        team_rules_id bigint not null
+    ) engine=InnoDB
+Hibernate: 
+    
+    create table team_team_rules (
+       team_id bigint not null,
+        team_rules_id bigint not null
+    ) engine=InnoDB
+2023-04-01T17:38:15.325+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    create table team_rule (
+       id bigint not null auto_increment,
+        rule_name varchar(255),
+        team_id bigint,
+        primary key (id)
+    ) engine=InnoDB
+Hibernate: 
+    
+    create table team_rule (
+       id bigint not null auto_increment,
+        rule_name varchar(255),
+        team_id bigint,
+        primary key (id)
+    ) engine=InnoDB
+2023-04-01T17:38:15.335+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table line 
+       add constraint UK_dx66owt1oq28jssqiepiqy4ro unique (token)
+Hibernate: 
+    
+    alter table line 
+       add constraint UK_dx66owt1oq28jssqiepiqy4ro unique (token)
+2023-04-01T17:38:15.341+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table member 
+       add constraint UK_9esvgikrmti1v7ci6v453imdc unique (name)
+Hibernate: 
+    
+    alter table member 
+       add constraint UK_9esvgikrmti1v7ci6v453imdc unique (name)
+2023-04-01T17:38:15.348+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table member 
+       add constraint UK_93d01lckd735mfvc6t7ko35ao unique (token)
+Hibernate: 
+    
+    alter table member 
+       add constraint UK_93d01lckd735mfvc6t7ko35ao unique (token)
+2023-04-01T17:38:15.355+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table team_team_rules 
+       add constraint UK_4804j2e83r271tw3xynb7jv92 unique (team_rules_id)
+Hibernate: 
+    
+    alter table team_team_rules 
+       add constraint UK_4804j2e83r271tw3xynb7jv92 unique (team_rules_id)
+2023-04-01T17:38:15.368+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table board 
+       add constraint FKsds8ox89wwf6aihinar49rmfy 
+       foreign key (member_id) 
+       references member (id)
+Hibernate: 
+    
+    alter table board 
+       add constraint FKsds8ox89wwf6aihinar49rmfy 
+       foreign key (member_id) 
+       references member (id)
+2023-04-01T17:38:15.386+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table comment 
+       add constraint FKlij9oor1nav89jeat35s6kbp1 
+       foreign key (board_id) 
+       references board (id)
+Hibernate: 
+    
+    alter table comment 
+       add constraint FKlij9oor1nav89jeat35s6kbp1 
+       foreign key (board_id) 
+       references board (id)
+2023-04-01T17:38:15.403+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table comment 
+       add constraint FKmrrrpi513ssu63i2783jyiv9m 
+       foreign key (member_id) 
+       references member (id)
+Hibernate: 
+    
+    alter table comment 
+       add constraint FKmrrrpi513ssu63i2783jyiv9m 
+       foreign key (member_id) 
+       references member (id)
+2023-04-01T17:38:15.423+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table line 
+       add constraint FKeomim8ovxkcruom7cgbewp29t 
+       foreign key (team_id) 
+       references team (id)
+Hibernate: 
+    
+    alter table line 
+       add constraint FKeomim8ovxkcruom7cgbewp29t 
+       foreign key (team_id) 
+       references team (id)
+2023-04-01T17:38:15.442+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table member 
+       add constraint FKcjte2jn9pvo9ud2hyfgwcja0k 
+       foreign key (team_id) 
+       references team (id)
+Hibernate: 
+    
+    alter table member 
+       add constraint FKcjte2jn9pvo9ud2hyfgwcja0k 
+       foreign key (team_id) 
+       references team (id)
+2023-04-01T17:38:15.464+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table team 
+       add constraint FKgciv1uqtys0w4lji435apk2v9 
+       foreign key (line_id) 
+       references line (id)
+Hibernate: 
+    
+    alter table team 
+       add constraint FKgciv1uqtys0w4lji435apk2v9 
+       foreign key (line_id) 
+       references line (id)
+2023-04-01T17:38:15.482+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table team_team_rules 
+       add constraint FKqq87y5ihqyox9wr3wh7n9xadh 
+       foreign key (team_rules_id) 
+       references team_rule (id)
+Hibernate: 
+    
+    alter table team_team_rules 
+       add constraint FKqq87y5ihqyox9wr3wh7n9xadh 
+       foreign key (team_rules_id) 
+       references team_rule (id)
+2023-04-01T17:38:15.496+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table team_team_rules 
+       add constraint FKmm4kdrhdl5ubywcge9f2xw2ow 
+       foreign key (team_id) 
+       references team (id)
+Hibernate: 
+    
+    alter table team_team_rules 
+       add constraint FKmm4kdrhdl5ubywcge9f2xw2ow 
+       foreign key (team_id) 
+       references team (id)
+2023-04-01T17:38:15.512+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    
+    alter table team_rule 
+       add constraint FK4osspsg46u72e62uk4d265amf 
+       foreign key (team_id) 
+       references team (id)
+Hibernate: 
+    
+    alter table team_rule 
+       add constraint FK4osspsg46u72e62uk4d265amf 
+       foreign key (team_id) 
+       references team (id)
+2023-04-01T17:38:15.530+09:00  INFO 18767 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-01T17:38:15.534+09:00  INFO 18767 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-01T17:38:15.805+09:00  WARN 18767 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-01T17:38:15.960+09:00  WARN 18767 --- [    Test worker] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 34b0e040-bb04-4a32-b80f-bf463b140b8e
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-04-01T17:38:16.004+09:00  INFO 18767 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@59b43e35, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@66297b63, org.springframework.security.web.context.SecurityContextHolderFilter@366c9912, org.springframework.security.web.header.HeaderWriterFilter@4a83d61c, org.springframework.security.web.csrf.CsrfFilter@4b718c45, org.springframework.security.web.authentication.logout.LogoutFilter@834b0f7, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@a6d4547, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@2a9fd482, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@1d7f2719, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@f461c9c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@137db13f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@38224635, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@685e5967, org.springframework.security.web.access.ExceptionTranslationFilter@1798c749, org.springframework.security.web.access.intercept.AuthorizationFilter@25291901]
+2023-04-01T17:38:16.028+09:00  INFO 18767 --- [    Test worker] c.h.B.board.BoardServiceTest             : Started BoardServiceTest in 2.412 seconds (process running for 2.907)
+2023-04-01T17:38:16.124+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        member
+        (name, password, team_id, token) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        member
+        (name, password, team_id, token) 
+    values
+        (?, ?, ?, ?)
+2023-04-01T17:38:16.129+09:00 TRACE 18767 --- [    Test worker] org.hibernate.orm.jdbc.bind              : binding parameter [1] as [VARCHAR] - [A]
+2023-04-01T17:38:16.129+09:00 TRACE 18767 --- [    Test worker] org.hibernate.orm.jdbc.bind              : binding parameter [2] as [VARCHAR] - [null]
+2023-04-01T17:38:16.130+09:00 TRACE 18767 --- [    Test worker] org.hibernate.orm.jdbc.bind              : binding parameter [3] as [BIGINT] - [null]
+2023-04-01T17:38:16.130+09:00 TRACE 18767 --- [    Test worker] org.hibernate.orm.jdbc.bind              : binding parameter [4] as [VARCHAR] - []
+2023-04-01T17:38:16.188+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    select
+        m1_0.id,
+        m1_0.name,
+        m1_0.password,
+        m1_0.team_id,
+        m1_0.token 
+    from
+        member m1_0 
+    where
+        m1_0.name=?
+Hibernate: 
+    select
+        m1_0.id,
+        m1_0.name,
+        m1_0.password,
+        m1_0.team_id,
+        m1_0.token 
+    from
+        member m1_0 
+    where
+        m1_0.name=?
+2023-04-01T17:38:16.188+09:00 TRACE 18767 --- [    Test worker] org.hibernate.orm.jdbc.bind              : binding parameter [1] as [VARCHAR] - [A]
+2023-04-01T17:38:16.210+09:00 DEBUG 18767 --- [    Test worker] org.hibernate.SQL                        : 
+    insert 
+    into
+        board
+        (create_date, member_id, modify_date, post, title) 
+    values
+        (?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        board
+        (create_date, member_id, modify_date, post, title) 
+    values
+        (?, ?, ?, ?, ?)
+2023-04-01T17:38:16.210+09:00 TRACE 18767 --- [    Test worker] org.hibernate.orm.jdbc.bind              : binding parameter [1] as [TIMESTAMP] - [2023-04-01T17:38:16.204969]
+2023-04-01T17:38:16.210+09:00 TRACE 18767 --- [    Test worker] org.hibernate.orm.jdbc.bind              : binding parameter [2] as [BIGINT] - [1]
+2023-04-01T17:38:16.211+09:00 TRACE 18767 --- [    Test worker] org.hibernate.orm.jdbc.bind              : binding parameter [3] as [TIMESTAMP] - [2023-04-01T17:38:16.204969]
+2023-04-01T17:38:16.211+09:00 TRACE 18767 --- [    Test worker] org.hibernate.orm.jdbc.bind              : binding parameter [4] as [VARCHAR] - [postA]
+2023-04-01T17:38:16.211+09:00 TRACE 18767 --- [    Test worker] org.hibernate.orm.jdbc.bind              : binding parameter [5] as [VARCHAR] - [titleA]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,48 @@
+<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content" class="p-4">
+
+    <h5 class="text-lg font-semibold mb-4">질문등록</h5>
+
+    <form method="post"
+          th:object="${boardCreateForm}"
+          class="space-y-4">
+
+        <input type="hidden"
+               th:name="${_csrf.parameterName}"
+               th:value="${_csrf.token}"/>
+
+
+        <select th:field="*{categoryName}" class="form-select block w-full mt-1">
+            <option value="">카테고리 선택 안함</option>
+            <option th:each="category : ${categories}"
+                    th:value="${category.name}"
+                    th:text="${category.name}"></option>
+        </select>
+
+        <div class="flex flex-col">
+            <label class="text-sm font-medium mb-1">제목</label>
+            <input type="text"
+                   th:field="*{title}"
+                   class="border
+                   border-gray-300 py-2 px-3
+                   rounded-lg
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"/>
+        </div>
+        <div class="flex flex-col">
+            <label class="text-sm font-medium mb-1">내용</label>
+            <textarea th:field="*{post}" rows="8"
+                      class="border
+                      border-gray-300 py-2 px-3 rounded-lg
+                      focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+        </div>
+
+        <input type="submit"
+               value="저장하기"
+               class="bg-blue-500 text-white py-2 px-4
+               rounded-md hover:bg-blue-600 transition
+               duration-200 ease-in-out cursor-pointer">
+
+    </form>
+
+</div>
+</html>
