@@ -12,15 +12,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MemberCreateForm {
 
-    @NotEmpty
+    @NotEmpty(message = "ID를 입력해주세요.")
     private String name;
 
-    @NotEmpty
+    @NotEmpty(message = "비밀번호를 입력해주세요.")
     private String password1;
 
-    @NotEmpty
+    @NotEmpty(message = "비밀번호를 입력해주세요.")
     private String password2;
 
-    @NotEmpty
+    @NotEmpty(message = "토큰을 입력해주세요.")
     private String token;
 }
