@@ -41,7 +41,7 @@ class CommentServiceTest {
         return boardService.create(title, post, member);
     }
     @Test
-    void CommentTests(){
+    void CommentTests() {
         // 게시글 작성 //
         Member member = this.memberService.create("name", "", "");
         Long boId = createBoard("제목", "내용", member);
@@ -53,7 +53,7 @@ class CommentServiceTest {
 
         // 댓글 수정 //
         Optional<Comment> checkco = this.commentRepository.findByContent("테스트 댓글");
-        if (!checkco.isPresent());
+        if (!checkco.isPresent()) ;
         Comment comment1 = checkco.get();
         Comment comment2 = checkco.get();
         commentService.modify(comment1, "수정");
@@ -62,18 +62,13 @@ class CommentServiceTest {
 
         //댓글 삭제 //
         Optional<Comment> checkco1 = this.commentRepository.findByContent("수정");
-        if (!checkco1.isPresent());
+        if (!checkco1.isPresent()) ;
         Comment comment12 = checkco1.get();
         Comment comment3 = checkco1.get();
         commentService.delete(comment12);
         assertTrue(!comment12.getContent().isEmpty());
         assertThat(comment12.getBoard().getComments()).isEqualTo(comment3.getBoard().getComments());
         assertThat(comment12.getBoard().getComments().size()).isEqualTo(0);
-
-    }
-
-    @Test
-    void asad() {
 
     }
 }

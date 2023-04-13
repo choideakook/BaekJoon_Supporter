@@ -1,5 +1,6 @@
 spring:
   datasource:
+<<<<<<< HEAD
     url: ENC(wqsN2hiQ5OsL99BY1OFgK9ktlXgtpcLFcwLjJQ2o1N/IK9ERonFE1A==)
     username: ENC(5k2JzV0niNNMldpPArbB/w==)
     password:
@@ -7,6 +8,13 @@ spring:
   h2:
     console:
       enabled: true
+=======
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ENC(ll4zKFuVNixjZ6I+y/0RYQ==)
+    password: ENC(KdhgHp6Vqy9QNQxC3RGcmNWCoTGCZ3tL)
+    url: ENC(ZomzDT2uG2jDiy69tMpypGRdc2A/lKVA29lyXd05ugV84uVjO6sq4dMvjYqs5RshGNx3RN11Wo63KzDoN7WchJ8NdbGV+NEApNRsG6zyrnB7z3t1Pb9DwehE2uklzmMMndYWUKdRqeNZ5M6+k6rY9u3u6szRDSLPXmVDFFqwgYpxd1bdaRP++w==)
+
+>>>>>>> park1
   thymeleaf:
     cache: false
     prefix: file:src/main/resources/templates/
@@ -27,7 +35,11 @@ spring:
 logging.level:
   org.hibernate:
     SQL: debug
+<<<<<<< HEAD
     #    type: trace # (Spring boot 2.X.X)
+=======
+#    type: trace # (Spring boot 2.X.X)
+>>>>>>> park1
     orm.jdbc.bind: trace # (Spring boot 3.X.X)
 jasypt:
   encryptor:
