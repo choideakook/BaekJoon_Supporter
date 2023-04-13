@@ -12,6 +12,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -67,6 +69,11 @@ class CommentServiceTest {
         assertTrue(!comment12.getContent().isEmpty());
         assertThat(comment12.getBoard().getComments()).isEqualTo(comment3.getBoard().getComments());
         assertThat(comment12.getBoard().getComments().size()).isEqualTo(0);
+
+    }
+
+    @Test
+    void asad() {
 
     }
 }

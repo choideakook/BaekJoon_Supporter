@@ -1,12 +1,9 @@
 spring:
-  datasource:
-    url: ENC(wqsN2hiQ5OsL99BY1OFgK9ktlXgtpcLFcwLjJQ2o1N/IK9ERonFE1A==)
-    username: ENC(5k2JzV0niNNMldpPArbB/w==)
-    password:
-    driver-class-name: org.h2.Driver
-  h2:
-    console:
-      enabled: true
+  profiles:
+    active: test
+
+
+
   thymeleaf:
     cache: false
     prefix: file:src/main/resources/templates/
@@ -32,3 +29,4 @@ logging.level:
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
+    password: qorwns
