@@ -1,0 +1,53 @@
+name: bsaAction
+
+on:  # 우선 main 브랜치만 설정 했지만 dev 브랜치 하나 생성(건의)
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3  # 사용할 버전 명시인데 공식문서를 확인해 봐야함
+        with:
+          java-version: 17
+          distribution: adopt #  jdk를 제공하는 벤더사 이름입니다. (zulu, adopt, microsoft 등) 즉 어느 jdk를 사용할 것인지를 설정
+          #      - name: access to secrets
+          #        run: |
+          #          echo "JASYPT_ENCRYPTOR_PASSWORD=$JASYPT_ENCRYPTOR_PASSWORD" >> .env
+          #        env:
+          #          JASYPT_ENCRYPTOR_PASSWORD: ${{secrets.JASYPT_ENCRYPTOR_PASSWORD}}
+
+      # 캐싱 부분 추가  ( 테스트 속도 향상)
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Test with Gradle
+        run: ./gradlew --info test -Pjasypt.encryptor.password=${{secrets.JASYPT_ENCRYPTOR_PASSWORD}}
+
+        # 캐싱 부분 추가
+      - name: Cleanup Gradle Cache
+        # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
+        # Restoring these files from a GitHub Actions cache might cause problems for future builds.
+        if: ${{ always() }}
+        run: |
+          rm -f ~/.gradle/caches/modules-2/modules-2.lock
+          rm -f ~/.gradle/caches/modules-2/gc.properties

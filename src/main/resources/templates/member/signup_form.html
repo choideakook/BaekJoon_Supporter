@@ -1,7 +1,27 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="py-12 flex justify-center">
 
-
+    <div class="max-w-xs">
+        <form th:action="@{/member/signup}" th:object="${MemberCreateForm}" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4">
+                <input th:field="*{name}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="아이디">
+            </div>
+            <div class="mb-6">
+                <input th:field="*{password1}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="비밀번호">
+            </div>
+            <div class="mb-6">
+                <input th:field="*{password2}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="비밀번호 확인">
+            </div>
+            <div class="mb-6">
+                <input th:field="*{token}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="라인 토큰">
+            </div>
+            <div class="flex justify-center mb-2">
+                <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    회원가입
+                </button>
+            </div>
+        </form>
+    </div>
 
 </div>
 </html>
