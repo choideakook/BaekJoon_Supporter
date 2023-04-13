@@ -1,7 +1,9 @@
 package com.huh.BaekJoonSupporter.comment;
 
+import com.huh.BaekJoonSupporter.board.Board;
 import com.huh.BaekJoonSupporter.board.BoardRepository;
 import com.huh.BaekJoonSupporter.board.BoardService;
+import com.huh.BaekJoonSupporter.member.Member;
 import com.huh.BaekJoonSupporter.member.MemberRepository;
 import com.huh.BaekJoonSupporter.member.MemberService;
 import org.junit.jupiter.api.Test;
@@ -33,26 +35,38 @@ class CommentServiceTest {
     @Autowired
     private MemberRepository memberRepository;
 
-    // 글, 유저 있다는 가정 (둘다 db에서 생성)
+    private Long createBoard(String title, String post, Member member) {
+        return boardService.create(title, post, member);
+    }
     @Test
-    @Rollback(value = false)
     void CommentTests(){
-        // 댓글 생성
-        Comment comment = this.commentService.create("테스트 댓글", boardService.getBoard(10L), memberService.getMember("park"));
-        assertThat(comment.getContent()).isEqualTo("댓글");
+        // 게시글 작성 //
+        Member member = this.memberService.create("name", "", "");
+        Long boId = createBoard("제목", "내용", member);
+        Board board = this.boardService.getBoard(boId);
 
-//         댓글 수정
-        Optional<Comment> checkco = this.commentRepository.findByContent("댓글");
-        if (checkco.isPresent());
+        // 댓글 생성 //
+        Comment comment = this.commentService.create("테스트 댓글", boardService.getBoard(boId), memberService.getMember(member.getName()));
+        assertThat(comment.getContent()).isEqualTo("테스트 댓글");
+
+        // 댓글 수정 //
+        Optional<Comment> checkco = this.commentRepository.findByContent("테스트 댓글");
+        if (!checkco.isPresent());
         Comment comment1 = checkco.get();
+        Comment comment2 = checkco.get();
         commentService.modify(comment1, "수정");
         assertThat(comment1.getContent()).isEqualTo("수정");
+        assertThat(comment1.getBoard().getComments()).isEqualTo(comment2.getBoard().getComments());
 
-//        댓글 삭제
+        //댓글 삭제 //
         Optional<Comment> checkco1 = this.commentRepository.findByContent("수정");
-        if (checkco1.isPresent());
+        if (!checkco1.isPresent());
         Comment comment12 = checkco1.get();
+        Comment comment3 = checkco1.get();
         commentService.delete(comment12);
         assertTrue(!comment12.getContent().isEmpty());
+        assertThat(comment12.getBoard().getComments()).isEqualTo(comment3.getBoard().getComments());
+        assertThat(comment12.getBoard().getComments().size()).isEqualTo(0);
+
     }
 }
