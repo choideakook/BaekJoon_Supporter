@@ -27,8 +27,9 @@ public class TeamRuleService {
     }
 
     // 규칙 조회
-    public TeamRule getTeamRule(Long teamId) {
-        Optional<TeamRule> teamRule = teamRuleRepository.findByTeamId(teamId);
+    // 팀 ID로 조회하는거 추후 변경 필요
+    public TeamRule getTeamRule(Long teamRuleId) {
+        Optional<TeamRule> teamRule = teamRuleRepository.findById(teamRuleId);
         if (teamRule.isPresent()) {
             return teamRule.get();
         } else {
