@@ -1,8 +1,6 @@
 package com.huh.BaekJoonSupporter.teamrule;
 
 import com.huh.BaekJoonSupporter.team.TeamService;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,15 +25,7 @@ public class TeamRuleController {
         return "teamrule/create";
     }
 
-    @AllArgsConstructor
-    @Getter
-    public class CreateForm {
-        private final String target;  // 목표 구분 라디오 박스 얻어올 값
 
-        private final String difficulty;  // 목표 구분 라디오 박스 얻어올 값
-
-        private final Long targetNumber;  // 목표 수
-    }
 
 //    @PostMapping("/create")
 //    public String ProcessCreate(@Valid CreateForm createForm) {
