@@ -38,4 +38,5 @@ out/
 .vscode/
 
 ### custom ###
+src/test/resources/application-dev.yml
 
