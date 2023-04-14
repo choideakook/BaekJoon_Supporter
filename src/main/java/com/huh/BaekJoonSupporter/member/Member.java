@@ -31,7 +31,7 @@ public class Member {
     @Builder.Default
     private List<Board> boards = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Team team;
 
     @OneToMany(mappedBy = "member")

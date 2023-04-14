@@ -33,4 +33,10 @@ public class MemberController {
     public String login() {
         return "/member/login_form";
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/me")
+    public String showMe() {
+        return "/member/me";
+    }
 }
