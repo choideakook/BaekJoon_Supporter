@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-@Component // db 자동 init 하려면 활성화
+//@Component // db 자동 init 하려면 활성화
 @RequiredArgsConstructor
 public class InitDB {
 
@@ -18,7 +18,6 @@ public class InitDB {
 
     @PostConstruct
     public void init1() {
-        initService.initBoard();
         initService.initCategory();
     }
 
@@ -31,16 +30,8 @@ public class InitDB {
         private final MemberService memberService;
         private final CategoryService categoryService;
 
-        public void initBoard() {
-            memberService.create("init 글쓴이", "", "");
-            Member member = memberService.getMember("init 글쓴이");
-
-            for (int i = 1; i <= 30; i++)
-                boardService.create("제목" + i, "내용" + i, member);
-        }
-
         public void initCategory() {
-            memberService.create("init 글쓴이", "", "");
+            memberService.create("init 글쓴이", "1234", "1234");
             Member member = memberService.getMember("init 글쓴이");
 
             for (int i = 1; i <= 3; i++) {
