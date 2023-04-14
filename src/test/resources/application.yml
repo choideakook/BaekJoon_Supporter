@@ -29,4 +29,3 @@ logging.level:
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
-    password: qorwns

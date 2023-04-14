@@ -16,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
+@TestPropertySource(properties = { "spring.config.location=classpath:application.yml" })
 public class TeamServiceTests {
 
     @Autowired

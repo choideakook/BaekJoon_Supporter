@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
+@TestPropertySource(properties = { "spring.config.location=classpath:application.yml" })
 class CommentServiceTest {
     @Autowired
     private CommentService commentService;
