@@ -38,4 +38,117 @@ out/
 .vscode/
 
 ### custom ###
+# 환경마다 DB 분리하기
 
+- 제목은 DB 를 분리한다고 했지만 사실 application yml 을 분리하는 것과 마찬가지다
+
+## ✏️ Profiles 로 환경 분리하기
+
+- profiles 를 사용하면 하나의 프로젝트에 여러개의 환경설정을 준비해둔뒤 편리하게 준비된 환경설정으로 교체시킬 수 있다.
+
+<br>
+
+### 📍 목표
+
+- 개발환경과 배포환경으로 2개의 DB 를 운영
+- **배표환경**
+    - application yml 을 사용
+- **개발환경**
+    - appliction-dev yml 을 사용
+    - repository 에 psu 할 때 해당 파일을 ignore 처리할 예정
+
+<br>
+
+### 📍 application yml 세팅 - 배포환경
+
+- run configuration 이 실행되면 기본적으로 application yml 파일에 작성되어있는 내용을 기반으로 서버가 작동된다.
+    - 그렇기 때문에 application yml 에 어떤 환경설정을 사용할지 명시해 주어야 한다.
+    - `default`
+        - 실행시키고 싶은 yml 의 profile 을 입력하는 설정이다.
+        - 만약 아무 값도 적지 않는다면 기본 appliction yml 이 작동된다.
+        - ⚠️ 참고로 `default` 에 값을 입력하고 push 하면 dev 파일은 ignore 로 제외되었기 때문에 action 에서 실패하게 된다.
+    - `datasource`
+        - 배포환경에서 사용할 db 의 정보들을 입력한다.
+        - 예시에서는 jasypt 사용해 암호화 되어있다.
+
+```yaml
+spring:
+  profiles:
+    default: # 실행시킬 yml 의 프로필을 입력 / 공백으로 두면 해당 파일이 실행됨
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ENC(ll4zKFuVNixjZ6I+y/0RYQ==)
+    password: ENC(KdhgHp6Vqy9QNQxC3RGcmNWCoTGCZ3tL)
+    url: ENC(ZomzDT2uG2jDiy69tMpypGRdc2A/lKVA29lyXd05ugV84uVjO6sq4dMvjYqs5RshGNx3RN11Wo63KzDoN7WchJ8NdbGV+NEApNRsG6zyrnB7z3t1Pb9DwehE2uklzmMMndYWUKdRqeNZ5M6+k6rY9u3u6szRDSLPXmVDFFqwgYpxd1bdaRP++w==)
+
+  thymeleaf:
+    cache: false
+    prefix: file:src/main/resources/templates/
+    devtools:
+      livereload:
+        enabled: true
+      restart:
+        enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+
+logging.level:
+  org.hibernate:
+    SQL: debug
+    orm.jdbc.bind: trace
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+```
+
+<br>
+
+### 📍 application-dev yml 세팅
+
+- 개발환경에서 사용되는 환경설정 yml 파일이다.
+    - 해당 파일에 적혀있는 내용은 application yml 에 덮어쓰기 방식으로 작동된다.
+    - 즉, 이미 application yml 에 적혀있는 내용은 작성할 필요가 없다.
+    - 수정하고 싶은 설정만 추가로 적어주면 된다.
+- `on-profile`
+    - 현재 파일의 profile 을 입력하는 설정이다.
+    - application yml 의 `default` 에 해당 값을 입력해주면 이 파일이 덮어쓰기되 작동된다.
+- `datasource`
+    - 로컬환경에서 사용할 db 정보를 입력해준다.
+- `ddl-auto`
+    - 혹시 나중에 배포환경에서 옵션을 `update` 로 바꿀수도 있으니 혹시몰라 `create` 로 설정해두었다.
+
+```yaml
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
+    username: root
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+```
+
+<br>
+
+## ✏️ git ignore
+
+- 아래 경로를 입력해 ignore 에 추가
+
+```yaml
+### custom ###
+src/test/resources/application-dev.yml
+```
