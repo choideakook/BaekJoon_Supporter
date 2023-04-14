@@ -1,6 +1,6 @@
 spring:
   profiles:
-    default: dev
+    default:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
