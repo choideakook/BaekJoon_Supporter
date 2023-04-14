@@ -35,6 +35,7 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
+	runtimeOnly 'com.h2database:h2'
 
 
 }
