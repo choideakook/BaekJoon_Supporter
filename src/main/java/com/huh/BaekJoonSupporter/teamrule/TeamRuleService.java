@@ -14,7 +14,6 @@ public class TeamRuleService {
 
     // 규칙 생성
     public TeamRule create(Team team, String target, String difficulty, Long targetNumber) {
-
         // 객체 생성
         TeamRule teamRule = TeamRule.builder()
                 .target(target)
@@ -28,22 +27,25 @@ public class TeamRuleService {
     }
 
     // 규칙 조회
-    public TeamRule getTeamRule(String target) {
-        Optional<TeamRule> teamRule = teamRuleRepository.findByTarget(target);
+    public TeamRule getTeamRule(Long teamId) {
+        Optional<TeamRule> teamRule = teamRuleRepository.findByTeamId(teamId);
         if (teamRule.isPresent()) {
             return teamRule.get();
         } else {
-            throw new DataNotFoundException("팀 규칙을 입력해주세요");
+            throw new DataNotFoundException("찾는 팀의 규칙이 없습니다.");
         }
     }
 
-    //    // 규칙 수정
-//    public void modify(TeamRule teamRule, String modifyRuleName) {
-//        TeamRule teamRule1 = teamRule.toBuilder()
-//                .ruleName(modifyRuleName)
-//                .build();
-//        teamRuleRepository.save(teamRule1);
-//    }
+  // 규칙 수정
+    public void modify(TeamRule teamRule, String changeTarget, String changeDifficulty, Long changeTargetNumber) {
+        TeamRule teamRule1 = teamRule.toBuilder()
+                .target(changeTarget)
+                .difficulty(changeDifficulty)
+                .targetNumber(changeTargetNumber)
+                .build();
+        teamRuleRepository.save(teamRule1);
+    }
+
 //    // 규칙 삭제
     public void delete(TeamRule teamRule) {
         teamRuleRepository.delete(teamRule);
