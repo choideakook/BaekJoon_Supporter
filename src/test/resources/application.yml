@@ -1,9 +1,7 @@
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ENC(ll4zKFuVNixjZ6I+y/0RYQ==)
-    password: ENC(KdhgHp6Vqy9QNQxC3RGcmNWCoTGCZ3tL)
-    url: ENC(ZomzDT2uG2jDiy69tMpypGRdc2A/lKVA29lyXd05ugV84uVjO6sq4dMvjYqs5RshGNx3RN11Wo63KzDoN7WchJ8NdbGV+NEApNRsG6zyrnB7z3t1Pb9DwehE2uklzmMMndYWUKdRqeNZ5M6+k6rY9u3u6szRDSLPXmVDFFqwgYpxd1bdaRP++w==)
+  profiles:
+    active: test
+
 
 
   thymeleaf:
