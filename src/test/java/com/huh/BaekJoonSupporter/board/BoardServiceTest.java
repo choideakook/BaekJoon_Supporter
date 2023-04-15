@@ -32,9 +32,8 @@ class BoardServiceTest {
         return boardService.create(title, post, member);
     }
 
-    //-- board create , getBoard test --//
     @Test
-    void save_test() {
+    void 게시물_생성과_게시물_조회() {
         Member member = createMember();
         Long boardId = createBoard("titleA", "postA", member);
 
@@ -51,9 +50,8 @@ class BoardServiceTest {
         assertThat(memberBoards).isSameAs(board);
     }
 
-    //-- board getBoardAll , delete test --//
     @Test
-    void getBoardAll_test() {
+    void 모든_게시물_조회와_게시물_삭제() {
         Member member = createMember();
         Long board1 = createBoard("A", "A", member);
         Long board2 = createBoard("B", "B", member);
@@ -82,10 +80,9 @@ class BoardServiceTest {
         assertThat(boardList.contains(findBoard1)).isFalse();
     }
 
-    //-- board modify test --//
 
     @Test
-    void modify_test() {
+    void 게시물_수정() {
         Member member = createMember();
         String titleA = "titleA", postA = "postA";
         Long boardId = createBoard(titleA, postA, member);

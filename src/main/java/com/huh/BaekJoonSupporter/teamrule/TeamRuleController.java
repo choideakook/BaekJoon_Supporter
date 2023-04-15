@@ -1,5 +1,6 @@
 package com.huh.BaekJoonSupporter.teamrule;
 
+
 import com.huh.BaekJoonSupporter.member.MemberService;
 import com.huh.BaekJoonSupporter.team.Team;
 import jakarta.validation.Valid;
