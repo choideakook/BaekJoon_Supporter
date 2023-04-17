@@ -28,10 +28,20 @@ public class CategoryService {
 
     //-- find by id --//
     public Category getCategory(Long id) {
-        Optional<Category> categories = categoryRepository.findById(id);
+        Optional<Category> byId = categoryRepository.findById(id);
 
-        if (categories.isPresent())
-            return categories.get();
+        if (byId.isPresent())
+            return byId.get();
+
+        throw new DataNotFoundException("존재하지 않는 카테고리입니다.");
+    }
+
+    //-- find by name --//
+    public Category getCategory(String name) {
+        Optional<Category> byName = categoryRepository.findByName(name);
+
+        if (byName.isPresent())
+            return byName.get();
 
         throw new DataNotFoundException("존재하지 않는 카테고리입니다.");
     }

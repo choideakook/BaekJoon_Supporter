@@ -31,7 +31,7 @@ public class BoardController {
     @GetMapping("/list")
     public String showList(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "-1") Long id,
+            @RequestParam(defaultValue = "-1") Long id, // category id
             Principal principal,
             Model model
     ) {
@@ -54,7 +54,7 @@ public class BoardController {
     @GetMapping("/create")
 //    @PreAuthorize("isAuthenticated()")
     public String showCreateForm(
-            BoardCreateForm boardCreateForm,
+            BoardCreateForm form,
             Model model
     ) {
         List<Category> categories = categoryService.getCategoryAll();
@@ -66,19 +66,20 @@ public class BoardController {
     @PostMapping("/create")
 //    @PreAuthorize("isAuthenticated()") // 로그인 기능 완성 후 활성화 해야됨
     public String showCreateForm(
-            BoardCreateForm boardCreateForm,
+            BoardCreateForm form,
             BindingResult bindingResult,
             Principal principal
     ) {
         // 로그인 기능 구현 되면 principal.getName 을 바꿔야 함
         Member member = memberService.getMember("init 글쓴이");
 
-        if (boardCreateForm.getCategory() == null)
-            boardService.create(boardCreateForm.getTitle(), boardCreateForm.getPost(), member);
+        if (form.getCategory().equals(""))
+            boardService.create(form.getTitle(), form.getPost(), member);
 
-        else
-            boardService.create(boardCreateForm.getTitle(), boardCreateForm.getPost(), member, boardCreateForm.getCategory());
-
+        else {
+            Category category = categoryService.getCategory(form.getCategory());
+            boardService.create(form.getTitle(), form.getPost(), member, category);
+        }
         return "redirect:/board/list";
     }
 
@@ -86,7 +87,7 @@ public class BoardController {
     @GetMapping("/detail/{id}")
     public String showDetail(
             @PathVariable Long id,
-            CommentForm commentForm,
+            CommentForm form,
             Principal principal,
             Model model
     ) {
@@ -102,12 +103,12 @@ public class BoardController {
 //    @PreAuthorize("isAuthenticated()")  // 지금은 권한 없이 아무나 삭제 가능함
     public String showUpdate(
             @PathVariable Long id,
-            BoardCreateForm boardCreateForm,
+            BoardCreateForm form,
             Principal principal
     ) {
         Board board = boardService.getBoard(id);
-        boardCreateForm.setTitle(board.getTitle());
-        boardCreateForm.setPost(board.getPost());
+        form.setTitle(board.getTitle());
+        form.setPost(board.getPost());
         return "/board/create";
     }
 
@@ -117,10 +118,10 @@ public class BoardController {
     public String showUpdate(
             @PathVariable Long id,
             Principal principal,
-            BoardCreateForm boardCreateForm
+            BoardCreateForm form
     ) {
         Board board = boardService.getBoard(id);
-        boardService.modify(board, boardCreateForm.getTitle(), boardCreateForm.getPost());
+        boardService.modify(board, form.getTitle(), form.getPost());
         return String.format("redirect:/board/detail/%s", id);
     }
 
