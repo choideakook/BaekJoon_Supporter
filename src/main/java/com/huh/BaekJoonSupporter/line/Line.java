@@ -4,9 +4,13 @@ import com.huh.BaekJoonSupporter.team.Team;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
+import static lombok.AccessLevel.PROTECTED;
+
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
+@Builder(toBuilder = true)
+@NoArgsConstructor(access = PROTECTED)
+@AllArgsConstructor
 public class Line {
 
     @Id
@@ -18,12 +22,5 @@ public class Line {
 
     @OneToOne(fetch = FetchType.LAZY)
     private Team team;
-
-    @Builder
-    public Line(Long id, String token, Team team) {
-        this.id = id;
-        this.token = token;
-        this.team = team;
-    }
 
 }
