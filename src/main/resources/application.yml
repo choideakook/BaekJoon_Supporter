@@ -1,4 +1,7 @@
 spring:
+  profiles:
+    default:
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ENC(ll4zKFuVNixjZ6I+y/0RYQ==)

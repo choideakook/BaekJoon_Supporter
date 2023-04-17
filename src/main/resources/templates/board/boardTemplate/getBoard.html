@@ -2,8 +2,8 @@
 
     <div class="max-w-4xl mx-auto p-8">
 
-<!--        <h1 th:text="${board.category.name}"-->
-<!--            class="text-4xl font-bold mb-4"></h1>-->
+        <h1 th:text="(${board.category} eq null)? '자유 게시물':${board.category.name}"
+            class="text-4xl font-bold mb-4"></h1>
 
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
             <div class="px-6 py-4">
