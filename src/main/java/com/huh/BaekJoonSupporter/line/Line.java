@@ -4,6 +4,8 @@ import com.huh.BaekJoonSupporter.team.Team;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
@@ -23,4 +25,6 @@ public class Line {
     @OneToOne(fetch = FetchType.LAZY)
     private Team team;
 
+    private LocalDateTime createDate;
+    private LocalDateTime modifyDate;
 }
