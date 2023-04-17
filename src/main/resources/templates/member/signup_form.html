@@ -1,19 +1,82 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="py-12 flex justify-center">
 
+    <script>
+        function SignupForm__submit(form) {
+
+            form.name.value = form.name.value.trim();
+
+            if (form.name.value.length == 0) {
+                alert('아이디를 입력해주세요.');
+                form.name.focus();
+                return;
+            }
+
+            if (form.name.value.length < 4) {
+                alert('아이디를 4자 이상 입력해주세요.');
+                form.name.focus();
+                return;
+            }
+
+            form.password1.value = form.password1.value.trim();
+
+            if (form.password1.value.length == 0) {
+                alert('비밀번호를 입력해주세요.');
+                form.password1.focus();
+                return;
+            }
+
+            if (form.password1.value.length < 4) {
+                alert('비밀번호를 4자 이상 입력해주세요.');
+                form.password1.focus();
+                return;
+            }
+
+            form.password2.value = form.password2.value.trim();
+
+            if (form.password2.value.length == 0) {
+                alert('비밀번호를 입력해주세요.');
+                form.password2.focus();
+                return;
+            }
+
+            if (form.password2.value.length < 4) {
+                alert('비밀번호를 4자 이상 입력해주세요.');
+                form.password2.focus();
+                return;
+            }
+
+            if (form.password1.value != form.password2.value) {
+                alert('동일한 비밀번호를 입력해주세요.');
+                form.password2.focus();
+                return;
+            }
+
+            form.token.value = form.token.value.trim();
+
+            if (form.token.value.length == 0) {
+                alert('라인 토큰을 입력해주세요.');
+                form.token.focus();
+                return;
+            }
+
+            form.submit(); // 폼 발송
+        }
+    </script>
+
     <div class="max-w-xs">
-        <form th:action="@{/member/signup}" th:object="${MemberCreateForm}" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form th:action method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="SignupForm__submit(this); return false;">
             <div class="mb-4">
-                <input th:field="*{name}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="아이디">
+                <input name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="아이디">
             </div>
             <div class="mb-6">
-                <input th:field="*{password1}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="비밀번호">
+                <input name="password1" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="비밀번호">
             </div>
             <div class="mb-6">
-                <input th:field="*{password2}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="비밀번호 확인">
+                <input name="password2" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="비밀번호 확인">
             </div>
             <div class="mb-6">
-                <input th:field="*{token}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="라인 토큰">
+                <input name="token" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="라인 토큰">
             </div>
             <div class="flex justify-center mb-2">
                 <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">

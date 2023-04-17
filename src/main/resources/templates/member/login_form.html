@@ -3,29 +3,26 @@
 
     <script>
         function LoginForm__submit(form) {
-            // username 이(가) 올바른지 체크
 
-            form.username.value = form.username.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
+            form.name.value = form.name.value.trim();
 
-            if (form.username.value.length == 0) {
+            if (form.name.value.length == 0) {
                 alert('아이디를 입력해주세요.');
-                form.username.focus();
+                form.name.focus();
                 return;
             }
 
-            if (form.username.value.length < 4) {
+            if (form.name.value.length < 4) {
                 alert('아이디를 4자 이상 입력해주세요.');
-                form.username.focus();
+                form.name.focus();
                 return;
             }
 
-            // password 이(가) 올바른지 체크
-
-            form.password.value = form.password.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
+            form.password.value = form.password.value.trim();
 
             if (form.password.value.length == 0) {
-                form.password.focus();
                 alert('비밀번호를 입력해주세요.');
+                form.password.focus();
                 return;
             }
 
@@ -39,13 +36,13 @@
         }
     </script>
 
-    <div class="max-w-xs">
-        <form th:action="@{/member/login}" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="LoginForm__submit(this); return false;">
+    <div class="max-w-md w-screen">
+        <form th:action method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="LoginForm__submit(this); return false;">
             <div class="mb-4">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="아이디">
+                <input name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="아이디">
             </div>
             <div class="mb-6">
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="비밀번호">
+                <input name="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="비밀번호">
             </div>
             <div class="flex justify-center mb-2">
                 <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
