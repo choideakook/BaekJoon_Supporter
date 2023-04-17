@@ -7,57 +7,122 @@
 <body>
 
 <script>
+    function TeamRuleForm__submit(form) {
+        // username 이(가) 올바른지 체크
 
+        <!-- 라디오박스 -->
+        const selectedTarget = $('input[name="target"]:checked').val();
 
+        <!-- 난이도 셀렉트박스 값-->
+        let selectedValue = $('#difficulty_id').val();
+
+        <!-- 문제수 셀렉트박스 값-->
+        let countValue = $('#count_id').val();
+        console.log(selectedTarget);
+        console.log(selectedValue);
+        console.log(countValue);
+
+        <!-- 목표 선택 검사-->
+        if (selectedTarget.length === 0) {
+            alert('목표를 선택해주세요');
+            $(form).find("[name=target]:first").focus();
+            return;
+        }
+
+        <!--난이도 선택 검사-->
+        if(selectedTarget === "유관") {
+            if (selectedValue === "default") {
+                alert('난이도를 선택해주세요');
+                return;
+            }
+        }
+
+        <!-- 목표 수 선택 검사-->
+        if (countValue == 0) {
+            alert('목표 개수를 선택해주세요');
+            return;
+        }
+
+        if(selectedTarget == "무관"){
+            if(selectedValue !="default")
+                selectedValue = "default";
+            form.submit();
+        }
+
+        form.submit(); // 폼 발송
+    }
 </script>
 
 <main layout:fragment="content">
-    <form th:action method="POST" class="p-10 max-w-sm flex flex-col gap-4"
-          onsubmit="AddForm__submit(this); return false;">
-        <div>
-            <div class="form-control">
-                <label class="label cursor-pointer">
-                    <span class="label-text">난이도 관계 없이 문제 풀기</span>
-                    <input type="radio" name="target" value="1" class="radio focus:bg-red-100">
-                </label>
-            </div>
-            <div class="form-control">
-                <label class="label cursor-pointer">
-                    <span class="label-text">난이도별 문제 풀기</span>
-                    <input type="radio" name="target" value="2" class="radio focus:bg-red-100">
-                </label>
-            </div>
+    <form th:action method="POST" class="pd-3 max-w-sm flex flex-col gap-4"
+          onsubmit="TeamRuleForm__submit(this); return false;">
+        <!-- 라디오버튼-->
+        <H3>목표 설정</H3>
+        <div class="flex items-center space-x-2">
+            <label class="inline-flex items-center">
+                <input type="radio" class="form-radio text-indigo-600 " name="target" value="무관">
+                <span class="ml-2">난이도 무관</span>
+            </label>
+            <label class="inline-flex items-center">
+                <input type="radio" class="form-radio text-indigo-600" name="target" value="유관">
+                <span class="ml-2">난이도 설정</span>
+            </label>
         </div>
-        <label>난이도 선택</label>
-        <select>
-            <option value="">-- 선택하세요 --</option>
-            <option value="Bronze">Bronze</option>
-            <option value="Silver">Silver</option>
-            <option value="Gold">Gold</option>
-            <option value="Platinum">Platinum</option>
-            <option value="Diamond">Diamond</option>
-            <option value="Ruby">Ruby</option>
-        </select>
 
-        <label>목표 갯수 선택</label>
-        <select>
-            <option value="">-- 선택하세요 --</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select>
-        <div>
-            <input type="submit" value="목표 등록" class="btn btn-primary">
+        <div id="difficulty" class="inline-block relative w-64">
+            <label>난이도 선택</label>
+            <select id="difficulty_id" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                <option value="default" selected>-- 선택하세요 --</option>
+                <option value="Bronze">Bronze</option>
+                <option value="Silver">Silver</option>
+                <option value="Gold">Gold</option>
+                <option value="Platinum">Platinum</option>
+                <option value="Diamond">Diamond</option>
+                <option value="Ruby">Ruby</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-10 right-0 flex items-center px-2 text-gray-700">
+                <svg class="fill-current h-4 w-4" viewBox="0 0 20 20"><path d="M14.95 6.95l-4.242 4.242-4.242-4.242a.999.999 0 1 0-1.414 1.414l4.95 4.95a.999.999 0 0 0 1.414 0l4.95-4.95a.999.999 0 1 0-1.414-1.414z"/></svg>
+            </div>
         </div>
+
+        <div class="inline-block relative w-64">
+            <label>목표 문제수 선택</label>
+            <select id="count_id" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                <option value="0" selected>-- 선택하세요 --</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-10 right-0 flex items-center px-2 text-gray-700">
+                <svg class="fill-current h-4 w-4" viewBox="0 0 20 20"><path d="M14.95 6.95l-4.242 4.242-4.242-4.242a.999.999 0 1 0-1.414 1.414l4.95 4.95a.999.999 0 0 0 1.414 0l4.95-4.95a.999.999 0 1 0-1.414-1.414z"/></svg>
+            </div>
+        </div>
+
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 w-1/4 text-sm rounded">
+            등록하기
+        </button>
     </form>
-
+    <!-- 난이도 무관이면 난이도 선택박스 안보이게-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('input[name="target"]').change(function() {
+                var selectedOption = $('input[name="target"]:checked').val();
+                if (selectedOption === '유관') {
+                    $('#difficulty').show(); // 보이게 함
+                } else {
+                    $('#difficulty').hide(); // 숨김
+                }
+            });
+        });
+    </script>
 </main>
 </body>
 
