@@ -1,0 +1,45 @@
+<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<div layout:fragment="content" class="p-4">
+
+    <script>
+        function MessageForm__submit(form) {
+
+            if (form.message.value.length < 1) {
+                alert('비밀번호를 한글자 이상 입력해주세요.');
+                form.password.focus();
+                return;
+            }
+
+            form.submit();
+        }
+    </script>
+
+
+    <div class="flex justify-center">
+
+        <div class="max-w-xs ">
+            <form th:action="@{/line/callTest1}" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onsubmit="MessageForm__submit(this); return false;">
+                <div class="mb-4">
+                    <h5 class="flex justify-center text-lg font-semibold mb-4"> 알림 보내기 </h5>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                           name="message" id="message" type="text" placeholder="메시지">
+                </div>
+
+                <div class="flex justify-center mb-2">
+
+                    <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            type="submit">
+                        전송하기
+                    </button>
+                </div>
+
+            </form>
+            <p class="text-center text-gray-500 text-xs">
+                &copy;2023 어? 금지 All rights reserved.
+            </p>
+        </div>
+    </div>
+
+
+</div>
+</html>
