@@ -27,15 +27,20 @@ public class Team {
     @Column(unique = true)
     private String teamName;
 
+    // 팀 설명
+    private String details;
+
     @OneToOne
     private Line line;
 
-    @OneToMany
+    @OneToMany(mappedBy = "team")
     @Builder.Default
+    @ToString.Exclude
     private List<TeamRule> teamRules = new ArrayList<>();
 
     @OneToMany(mappedBy = "team")
     @Builder.Default
+    @ToString.Exclude
     private List<Member> members = new ArrayList<>();
 
     private LocalDateTime createDate;
