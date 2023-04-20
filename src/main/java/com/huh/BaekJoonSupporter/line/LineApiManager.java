@@ -18,10 +18,11 @@ public class LineApiManager {
 
     private final String my_token = "Bearer 032bJyZzg1uq56SKQvAOJ4WDXjL8YcqWJsbkYlE0TSm";
     private final static String api_url = "https://notify-api.line.me/api/notify?message=";
+    private final static String check_status_api = "https://notify-api.line.me/api/status";
     private final static String HEADER_AUTH = "Authorization";
 
     @PreAuthorize("isAnonymous()")
-    @PostMapping("/callTest1")
+    @PostMapping("/call")
     public String callAPI(@Valid LineMessageForm lineMessageForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "redirect:/member/login";
@@ -39,6 +40,24 @@ public class LineApiManager {
         ResponseEntity<String> jsonObject = restTemplate.exchange(apiContext, HttpMethod.POST, httpEntity, String.class);
 
         return "redirect:/line/message_form";
+    }
+
+    @PreAuthorize("isAnonymous()")
+    @PostMapping("/bring")
+    public String bringToken(@Valid LineMessageForm lineMessageForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "redirect:/member/login";
+        }
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set(HEADER_AUTH, "Bearer "+lineMessageForm.getMessage());
+
+        HttpEntity<?> httpEntity = new HttpEntity<>(httpHeaders);
+
+        ResponseEntity<String> jsonObject = restTemplate.exchange(check_status_api, HttpMethod.GET, httpEntity, String.class);
+
+        return jsonObject.getBody().toString();
     }
     
 }
