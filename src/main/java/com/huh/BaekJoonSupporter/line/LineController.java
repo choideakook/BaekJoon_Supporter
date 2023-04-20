@@ -14,4 +14,8 @@ public class LineController {
         return "/line/message_form";
     }
 
+    @GetMapping("save")
+    public String saveToken() {
+        return "/line/save_token_form";
+    }
 }
